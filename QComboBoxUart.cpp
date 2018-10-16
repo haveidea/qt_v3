@@ -1,4 +1,4 @@
-#include "QComboBox_uart_baudrate.h"
+#include "QComboBoxUart.h"
 
 
 void QComboBox_uart_baudrate::refresh()
@@ -84,8 +84,6 @@ void QComboBox_uart_baudrate::bind_uart(UART * uart){
     refresh();
 }
 
-#include "QComboBox_uart_stopbits.h"
-
 
 void QComboBox_uart_stopbits::refresh()
 {
@@ -132,10 +130,6 @@ void QComboBox_uart_stopbits::bind_uart(UART * uart){
     this->uart = uart;
     refresh();
 }
-
-
-
-#include "QComboBox_uart_port.h"
 
 
 void QComboBox_uart_port::refresh()
@@ -221,10 +215,6 @@ void QComboBox_uart_port::addvalidport(int i)
 }
 
 
-
-#include "QComboBox_uart_parity.h"
-
-
 void QComboBox_uart_parity::refresh()
 {
 
@@ -285,9 +275,6 @@ void QComboBox_uart_parity::bind_uart(UART * uart){
     refresh();
 }
 
-
-
-#include "QComboBox_uart_flowcontrol.h"
 
 
 void QComboBox_uart_flowcontrol::refresh()
@@ -359,8 +346,6 @@ void QComboBox_uart_flowcontrol::bind_uart(UART * uart){
 }
 
 
-
-#include "QComboBox_uart_data.h"
 
 
 void QComboBox_uart_data::refresh()

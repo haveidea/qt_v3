@@ -2,12 +2,8 @@
 
 #ifndef MYUARTCONFIGUI_H
 #define MYUARTCONFIGUI_H
-#include "QComboBox_uart_port.h"
-#include "QComboBox_uart_parity.h"
-#include "QComboBox_uart_stopbits.h"
-#include "QComboBox_uart_flowcontrol.h"
-#include "QComboBox_uart_baudrate.h"
-#include "QComboBox_uart_data.h"
+#include "QComboBoxUart.h"
+
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
 #include <Qt>
