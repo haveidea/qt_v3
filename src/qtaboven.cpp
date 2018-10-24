@@ -2,7 +2,6 @@
 
 QTabOven::QTabOven():QTabWidget()
 {
-
     QSizePolicy sizePolicy;
 
     this->setObjectName(QStringLiteral("tab_oven"));
@@ -251,10 +250,14 @@ QTabOven::QTabOven():QTabWidget()
     mother_board_num->setSizePolicy(sizePolicy);
     mother_board_num->setObjectName(QStringLiteral("mother_board_num"));
     mother_board_num->setText(QApplication::translate("MainWindow", "", nullptr));
+
+    TextWindow = new QTextBrowser(this);
+    TextWindow->setGeometry(QRect(10, 480, 1300, 170));
+    sizePolicy.setHeightForWidth(TextWindow->sizePolicy().hasHeightForWidth());
+    TextWindow->setObjectName(QStringLiteral("TextWindow"));
 }
 void QTabOven::on_OvenRun_clicked(){
     qDebug("click run oven button");
-
     emit set_oven_cmd(1);
 }
 void QTabOven::on_OvenStop_clicked(){

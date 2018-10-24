@@ -59,11 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //  cur_agent->moveToThread(&agent_thread);
 
 
-    this->ui->qgroup_uart_conf[0]->bind_uart(cur_agent->mcu_uart_agent[0]->mcu_uart);
-    this->ui->qgroup_uart_conf[1]->bind_uart(cur_agent->mcu_uart_agent[1]->mcu_uart);
-    this->ui->qgroup_uart_conf[2]->bind_uart(cur_agent->mcu_uart_agent[2]->mcu_uart);
-    this->ui->qgroup_uart_conf[3]->bind_uart(cur_agent->mcu_uart_agent[3]->mcu_uart);
-    this->ui->qgroup_uart_conf[4]->bind_uart(cur_agent->oven_uart);
+    this->ui->tab_run_board[0]->qgroup_uart_conf->bind_uart(cur_agent->mcu_uart_agent[0]->mcu_uart);
+    this->ui->tab_run_board[1]->qgroup_uart_conf->bind_uart(cur_agent->mcu_uart_agent[1]->mcu_uart);
+    this->ui->tab_run_board[2]->qgroup_uart_conf->bind_uart(cur_agent->mcu_uart_agent[2]->mcu_uart);
+    this->ui->tab_run_board[3]->qgroup_uart_conf->bind_uart(cur_agent->mcu_uart_agent[3]->mcu_uart);
+   // this->ui->tab_set_oven->qgroup_uart_conf->bind_uart(cur_agent->oven_uart);
 
 
     this->ui->tab_run_board[0]->installEventFilter(this);
@@ -74,9 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     for (int ii = 0; ii < NUM_MOTHER_BOARDS; ii++){
 
         QObject::connect(ui->tab_run_board[ii]->RunAll, SIGNAL(pressed()), cur_agent->mcu_uart_agent[ii], SLOT(run_all()),Qt::QueuedConnection);
-
-
-        QObject::connect(ui->tab_run_board[ii], SIGNAL(execute_uart_cmd(int,int,int,int,int,int,Byte*,int)), cur_agent->mcu_uart_agent[ii], SLOT(execute_uart_cmd(int,int,int,int,int,int,Byte*,int)),Qt::QueuedConnection);
+        QObject::connect(ui->tab_run_board[ii], SIGNAL(uart_cmd_clicked(int,int,int,int,int,int,Byte*,int)), cur_agent->mcu_uart_agent[ii], SLOT(execute_uart_cmd(int,int,int,int,int,int,Byte*,int)),Qt::QueuedConnection);
 
         QObject::connect(cur_agent->mcu_uart_agent[ii], SIGNAL(run_all_done()), this->ui->tab_run_board[ii], SLOT(repaint()),Qt::QueuedConnection);
 
@@ -89,8 +87,6 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     QObject::connect(cur_agent, SIGNAL(refresh_oven_temp()), this, SLOT(update_display()));
 
-    //QObject::connect(ui->tab_run_board[0]->RunCmd, SIGNAL(clicked()), this, SLOT(on_RunCmd_clicked()));
-
     // for oven control tab
     QObject::connect(ui->tab_set_oven, SIGNAL(set_oven_cmd(int)),    cur_agent, SLOT(set_oven_cmd(int)));
     QObject::connect(ui->tab_set_oven, SIGNAL(set_oven_temp(float)), cur_agent, SLOT(set_oven_temp(float)));
@@ -102,6 +98,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->tab_set_oven, SIGNAL(auto_check_temp_all_board(float , long int , int )), cur_agent, SLOT(auto_check_temp_all_board(float , long int , int )));
     QObject::connect(ui->tab_set_oven, SIGNAL(manual_check_temp_all_board(int)), cur_agent, SLOT(manual_check_temp_all_board(int)));
 
+
+    QObject::connect(ui->tab_run_board[0]->qgroup_uart_conf->uart->serial, SIGNAL(readyRead()), ui->tab_run_board[0], SLOT(uart_response_handler()));
+    QObject::connect(ui->tab_run_board[1]->qgroup_uart_conf->uart->serial, SIGNAL(readyRead()), ui->tab_run_board[1], SLOT(uart_response_handler()));
+    QObject::connect(ui->tab_run_board[2]->qgroup_uart_conf->uart->serial, SIGNAL(readyRead()), ui->tab_run_board[2], SLOT(uart_response_handler()));
+    QObject::connect(ui->tab_run_board[3]->qgroup_uart_conf->uart->serial, SIGNAL(readyRead()), ui->tab_run_board[3], SLOT(uart_response_handler()));
     //  agent_thread.start();
 
     //    data2index_map[8] = 0;

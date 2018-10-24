@@ -24,9 +24,8 @@ class myAgent: public QObject
 public slots:
     void set_oven_cmd(int);
     void set_oven_temp(float);
-    float       get_oven_temp();
+    float  get_oven_temp();
     void get_oven_temp2(double&);
-    //void run_all_board();
     void run_all_board(float , float , float , long int , long int , long int , int , int);
     void set_parameters_all_board(int);
     void check_parameters_all_board(int);

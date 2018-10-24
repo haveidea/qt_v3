@@ -29,17 +29,21 @@
 #include <QPalette>
 #include <QTextBrowser>
 #include <QGraphicsScene>
+#include <QTextBrowser>
+#include "QGroupUartConfig.h"
+#include "mymcuagent.h"
 
 
 class QTabBoard:public QTabWidget
 {
     Q_OBJECT
-public slots:
-    void on_RunCmd_clicked();
-    //void on_AutoTest_clicked();
+
 public:
     QTabBoard();
     QPixmap * pixmap;
+
+    QGroupUartConfig * qgroup_uart_conf;
+
 
     QPushButton *RunAll;
     QPushButton *RunCmd;
@@ -62,13 +66,21 @@ public:
     QLabel* label_sel;
     QLabel* label_payload;
 
+   // myMCUAgent mcuagent;
+
+
+    QTextBrowser* TextWindow;
+    void uart_response_handler();
+
+
     QSizePolicy sizePolicy;
 protected:
     virtual void	paintEvent(QPaintEvent *event);
+public slots:
+    void on_RunCmd_clicked();
 signals:
-    void execute_uart_cmd(int sel, int cmd, int boardx, int boardy, int row,int col,Byte* payload, int payload_len);
+    void uart_cmd_clicked(int sel, int cmd, int boardx, int boardy, int row,int col,Byte* payload, int payload_len);
     void run_all();
-
 };
 
 #endif // QTABBOARD_H

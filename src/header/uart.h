@@ -10,28 +10,33 @@
 #include <Windows.h>
 #include <myglobal.h>
 #include <vector>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
 
 #define MAX_BUF_LEN 65536
 
-
+typedef struct
+{
+    int num;
+    TCHAR name[5000];
+}  uartport;
 class UART{
+public slots:
+    void readData(void);
 public:
+    QSerialPort * serial;
     DCB    dcb;
     Byte   read_buffer[MAX_BUF_LEN];
     HANDLE hComm;
+    void handleError(QSerialPort::SerialPortError );
     unsigned int port_id;
-    void SelectComPort(std::vector<int> *);
+   // void SelectComPort(std::vector<QSerialPort> *);
 
 
     COMSTAT Comstat;
 
-    bool SetupTimeout(DWORD ReadInterval,
-                      DWORD ReadTotalMultiplier,
-                      DWORD ReadTotalConstant,
-                      DWORD WriteTotalMultiplier,
-                      DWORD WriteTotalConstant);
-    bool SetupDCB(DCB &config);
     OVERLAPPED OverLapped;
+
 
 public:
     UART();
@@ -39,14 +44,10 @@ public:
     bool               is_opened;
     bool               open();
     bool               close();
-    bool               setupdcb(DCB & conf);
 
     bool               write(Byte* szWriteBuffer, DWORD dwSend);
-    bool               read(Byte *, unsigned int );
-    bool               readbyte(Byte* RXBuff);
 
     virtual void       load_default(void);
-    void                PrintDCB();
 };
 
 #endif // UART_H

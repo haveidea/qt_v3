@@ -1,20 +1,19 @@
-#include "QGroupUartConfig.h"
+﻿#include "QGroupUartConfig.h"
+#include "myglobal.h"
 
 QGroupUartConfig::~QGroupUartConfig()
 {
 
 }
+
 QGroupUartConfig::QGroupUartConfig(int id, QWidget * parent):QGroupBox(parent)
 {
-    //this = new QGroupBox(parent);
     setObjectName(QStringLiteral("uart_setting"));
-    setGeometry(QRect(id*180 +60, 70, 150, 400));
-    //   sizePolicy.setHeightForWidth(this->sizePolicy().hasHeightForWidth());
-    //    this->setSizePolicy(sizePolicy);
+    setGeometry(QRect(id*180 +260, 70, 250, 400));
 
     uart_port = new QComboBox_uart_port(this);
     uart_port->setObjectName(QStringLiteral("uart_port"));
-    uart_port->setGeometry(QRect(70, 40, 70, 25));
+    uart_port->setGeometry(QRect(70, 40, 150, 25));
     sizePolicy.setHeightForWidth(uart_port->sizePolicy().hasHeightForWidth());
     uart_port->setSizePolicy(sizePolicy);
 
@@ -86,113 +85,76 @@ QGroupUartConfig::QGroupUartConfig(int id, QWidget * parent):QGroupBox(parent)
     sizePolicy1.setHeightForWidth(label_13->sizePolicy().hasHeightForWidth());
     label_13->setSizePolicy(sizePolicy1);
 
-    this->label_20->setText(QApplication::translate("MainWindow", "\347\253\257\345\217\243", nullptr));
+    this->label_20->setText(QApplication::translate("MainWindow", "端口", nullptr));
+    this->label_16->setText(QApplication::translate("MainWindow", "波特率", nullptr));
+    this->label_19->setText(QApplication::translate("MainWindow", "数据位", nullptr));
+    this->label_15->setText(QApplication::translate("MainWindow", "流量控制", nullptr));
+    this->label_18->setText(QApplication::translate("MainWindow", "校验位", nullptr));
+    this->label_21->setText(QApplication::translate("MainWindow", "停止位", nullptr));
 
-    this->label_16->setText(QApplication::translate("MainWindow", "\346\263\242\347\211\271\347\216\207", nullptr));
-
-    this->label_19->setText(QApplication::translate("MainWindow", "\346\225\260\346\215\256\344\275\215", nullptr));
-
-
-    this->label_15->setText(QApplication::translate("MainWindow", "\346\265\201\351\207\217\346\216\247\345\210\266", nullptr));
-
-
-    this->label_18->setText(QApplication::translate("MainWindow", "\346\240\241\351\252\214\344\275\215", nullptr));
-    this->label_21->setText(QApplication::translate("MainWindow", "\345\201\234\346\255\242\344\275\215", nullptr));
-
-    this->label_13->setText(QApplication::translate("MainWindow", "\347\253\257\345\217\243", nullptr));
-
-    SetUart = new QPushButton(this);
-    SetUart->setObjectName(QStringLiteral("SetUart"));
-    SetUart->setGeometry(QRect(20, 300, 50, 30));
-    sizePolicy.setHeightForWidth(SetUart->sizePolicy().hasHeightForWidth());
-    SetUart->setSizePolicy(sizePolicy);
-    SetUart->setAutoDefault(false);
-    //ResetUart button
-    ResetUart = new QPushButton(this);
-    ResetUart->setObjectName(QStringLiteral("ResetUart"));
-    ResetUart->setGeometry(QRect(80, 300, 50, 30));
-    sizePolicy.setHeightForWidth(ResetUart->sizePolicy().hasHeightForWidth());
-    ResetUart->setSizePolicy(sizePolicy);
-    //OpenClose button
+   //OpenClose button
     OpenClose = new QPushButton(this);
     OpenClose->setObjectName(QStringLiteral("OpenClose"));
     OpenClose->setGeometry(QRect(25, 350, 100, 30));
     sizePolicy.setHeightForWidth(OpenClose->sizePolicy().hasHeightForWidth());
     OpenClose->setSizePolicy(sizePolicy);
 
-    SetUart->setText(QApplication::translate("MainWindow", "Set", nullptr));
-    ResetUart->setText(QApplication::translate("MainWindow", "Reset", nullptr));
-    OpenClose->setText(QApplication::translate("MainWindow", "Click to Open", nullptr));
+    OpenClose->setText(QApplication::translate("MainWindow", "打开串口", nullptr));
 
     QObject::connect(this->OpenClose, SIGNAL( clicked(bool)), this, SLOT(on_OpenClose_Clicked()));
-    QObject::connect(this->SetUart,   SIGNAL( clicked(bool)), this, SLOT(on_SetUart_clicked()));
-    QObject::connect(this->ResetUart, SIGNAL( clicked(bool)), this, SLOT(on_ResetUart_clicked()));
-
-}
-
-
-void QGroupUartConfig::on_SetUart_clicked()
-{
-    qDebug()<<"SetUart clicked";
-    setvalue();
-}
-
-void QGroupUartConfig::on_ResetUart_clicked()
-{
-    qDebug()<<"ResetUart clicked";
-   // this->uart->load_default();
-    refresh();
 }
 
 void QGroupUartConfig::on_OpenClose_Clicked(){
     qDebug("open close uart button clicked, current status is %d",this->uart->is_opened);
-
     if(this->uart->is_opened)
-    {
-        if(uart->close())
-            OpenClose->setText(QApplication::translate("MainWindow", "Click to Open", nullptr));
+     {
+        if(uart->close()){
+            this->uart_baud->setEnabled(true);
+            this->uart_paritybit->setEnabled(true);
+            this->uart_port->setEnabled(true);
+            this->uart_databits->setEnabled(true);
+            this->uart_flowcontrol->setEnabled(true);
+            this->uart_stopbits->setEnabled(true);
+            OpenClose->setText(QApplication::translate("MainWindow", "打开串口", nullptr));
+        }
+        else{
+            qInfo("Close Uart error!!!");
+        }
 
     }
     else{
-        if(uart->open())
-            OpenClose->setText(QApplication::translate("MainWindow", "Click to Close", nullptr));
+        this->setvalue();
+        if(uart->open()){
+            this->uart_baud->setEnabled(false);
+            this->uart_paritybit->setEnabled(false);
+            this->uart_port->setEnabled(false);
+            this->uart_databits->setEnabled(false);
+            this->uart_flowcontrol->setEnabled(false);
+            this->uart_stopbits->setEnabled(false);
+            OpenClose->setText(QApplication::translate("MainWindow", "关闭串口", nullptr));
+        }
+        else{
+            qInfo("Open Uart error!!!");
+        }
     }
 
 }
 
 void QGroupUartConfig::bind_uart(UART * uart){
     this->uart=uart;
-    this->uart_paritybit->bind_uart(uart);
     this->uart_baud->bind_uart(uart);
+    this->uart_paritybit->bind_uart(uart);
     this->uart_databits->bind_uart(uart);
     this->uart_flowcontrol->bind_uart(uart);
     this->uart_port->bind_uart(uart);
     this->uart_stopbits->bind_uart(uart);
 }
-void QGroupUartConfig::refresh(){
-    this->uart_paritybit->refresh();
-    this->uart_baud->refresh();
-    this->uart_databits->refresh();
-    this->uart_flowcontrol->refresh();
-    this->uart_port->refresh();
-    this->uart_stopbits->refresh();
-}
+
 void QGroupUartConfig::setvalue(){
-    this->uart_paritybit->setvalue();
     this->uart_baud->setvalue();
+    this->uart_paritybit->setvalue();
     this->uart_databits->setvalue();
     this->uart_flowcontrol->setvalue();
     this->uart_port->setvalue();
     this->uart_stopbits->setvalue();
 }
-
-
-
-
-
-
-
-
-
-
-

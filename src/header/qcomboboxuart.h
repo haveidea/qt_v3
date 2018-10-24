@@ -1,4 +1,4 @@
-#ifndef QCOMBOBOXUART_H
+﻿#ifndef QCOMBOBOXUART_H
 #define QCOMBOBOXUART_H
 
 #define QT_NO_DEBUG_OUTPUT
@@ -27,10 +27,11 @@ public:
     QComboBox_uart_port();
     QComboBox_uart_port(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+  //  void refresh();
+    void config();
     void setvalue();
-    void addvalidport(int);
-    std::vector<int> vec_valid_ports;
+   // void addvalidport(int);
+    std::vector<QSerialPort> vec_valid_ports;
 signals:
     void refresh_valid_ports();
 private:
@@ -48,10 +49,9 @@ class QComboBox_uart_parity:public QComboBox
 {
     Q_OBJECT
 public:
-    QComboBox_uart_parity();
     QComboBox_uart_parity(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+  //  void refresh();
     void setvalue();
 private:
     void config();
@@ -69,7 +69,7 @@ public:
     QComboBox_uart_flowcontrol();
     QComboBox_uart_flowcontrol(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+ //   void refresh();
     void setvalue();
 private:
     void config();
@@ -88,7 +88,7 @@ public:
     QComboBox_uart_data();
     QComboBox_uart_data(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+   // void refresh();
     void setvalue();
 private:
     void config();
@@ -106,7 +106,7 @@ public:
     QComboBox_uart_baudrate();
     QComboBox_uart_baudrate(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+  //  void refresh();
     void setvalue();
 private:
     void config();
@@ -124,7 +124,7 @@ public:
     QComboBox_uart_stopbits();
     QComboBox_uart_stopbits(QWidget *parent=nullptr);
     void bind_uart(UART * uart= nullptr);
-    void refresh();
+ //   void refresh();
     void setvalue();
 private:
     void config();

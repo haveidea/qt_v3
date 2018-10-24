@@ -23,6 +23,20 @@ bool isNum(string str);
 #define NUM_CHIPS_X         10
 #define NUM_CHIPS_Y         10
 
+#define WINDOW_SIZE_X       1366
+#define WINDOW_SIZE_Y       768
 
+//#include "log4qt/consoleappender.h"
+#include "log4qt/logger.h"
+//#include "log4qt/ttcclayout.h"
+#include "log4qt/basicconfigurator.h"
+
+#include "log4qt/propertyconfigurator.h"
+
+//QString LogNames[5];
+extern Log4Qt::Logger *a2 ;
+extern Log4Qt::Logger *a3 ;
+
+#pragma execution_character_set("utf-8")
 
 #endif // MYGLOBAL_H

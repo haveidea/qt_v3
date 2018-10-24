@@ -11,10 +11,8 @@ class myMCU:public UART,public myPackage
 {
 public:
 
-
     myMCU();
     virtual void load_default();
-    unsigned char *get_payload();
 };
 
 #endif // MYMCU_H

@@ -24,11 +24,12 @@ class QGroupUartConfig:public QGroupBox
     Q_OBJECT
 
 public slots:
-    void refresh();
+  //  void refresh();
     void setvalue();
     void on_OpenClose_Clicked();
-    void on_SetUart_clicked();
-    void on_ResetUart_clicked();
+  //  void on_SetUart_clicked();
+   // void on_ResetUart_clicked();
+ //   void on_SetUart_clicked_rename();
 
 public:
     QGroupUartConfig(int id, QWidget *parent=nullptr );

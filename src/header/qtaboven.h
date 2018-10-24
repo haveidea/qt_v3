@@ -26,6 +26,7 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QTextBrowser>
 #include <QPalette>
 #include <QTextBrowser>
 #include "QMessageBox"
@@ -54,7 +55,7 @@ public:
 
     QPushButton * GetTemp;
     QPushButton * RunAll;
-
+    QTextBrowser * TextWindow;
     QLabel* label_calibre_low;
     QLabel* label_calibre_high;
     QLabel* label_temp_check;
@@ -94,6 +95,7 @@ private slots:
     void on_RunAll_clicked();
     void on_GetTemp_clicked();
     void on_SetTemp_clicked();
+
     //void on_SetTemp7_clicked();
     //void on_SetTemp27_clicked();
     //void on_SetTemp47_clicked();

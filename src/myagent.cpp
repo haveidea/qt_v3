@@ -143,88 +143,89 @@ myAgent::~myAgent()
 
 float myAgent::get_oven_temp()
 {
-    //qDebug()<<"TODO";
-    //Byte a[8],b[8];
-    float result;
+//    //qDebug()<<"TODO";
+//    //Byte a[8],b[8];
+//    float result;
 
-    Byte a[10],b[12];
+//    Byte a[10],b[12];
 
-    //a[0] = 0x01;
-    //a[1] = 0x04;
-    //a[2] = 0x00;
-    //a[3] = 0x5e;
-    //a[4] = 0x00;
-    //a[5] = 0x01;
-    //a[6] = CRC16_MODBUS(a,6)>>8;
-    //a[7] = CRC16_MODBUS(a,6)&0xFF;
+//    //a[0] = 0x01;
+//    //a[1] = 0x04;
+//    //a[2] = 0x00;
+//    //a[3] = 0x5e;
+//    //a[4] = 0x00;
+//    //a[5] = 0x01;
+//    //a[6] = CRC16_MODBUS(a,6)>>8;
+//    //a[7] = CRC16_MODBUS(a,6)&0xFF;
 
 
-    a[0] = 0x01;
-    a[1] = 0x04;
-    a[2] = 0x00;
-    a[3] = 0x5b;
-    a[4] = 0x00;
-    a[5] = 0x04;
-    a[6] = 0x80;
-    a[7] = 0x1a;
+//    a[0] = 0x01;
+//    a[1] = 0x04;
+//    a[2] = 0x00;
+//    a[3] = 0x5b;
+//    a[4] = 0x00;
+//    a[5] = 0x04;
+//    a[6] = 0x80;
+//    a[7] = 0x1a;
 
-//    a[0] = 0x00;
-//    a[1] = 0x0a;
-//    a[2] = 0x6b;
-//    a[3] = 0x11;
-//    a[4] = 0x02;
-//    a[5] = 0x00;
-//    a[6] = 0x00;
-//    a[7] = 0x00;
-//    a[8] = 0xfe;
-//    a[9] = 0xff;
+////    a[0] = 0x00;
+////    a[1] = 0x0a;
+////    a[2] = 0x6b;
+////    a[3] = 0x11;
+////    a[4] = 0x02;
+////    a[5] = 0x00;
+////    a[6] = 0x00;
+////    a[7] = 0x00;
+////    a[8] = 0xfe;
+////    a[9] = 0xff;
 
-    if(this->oven_uart->is_opened!=TRUE)
-    {
-        qInfo("oven uart is not open. get oven temp error");
+//    if(this->oven_uart->is_opened!=TRUE)
+//    {
+//        qInfo("oven uart is not open. get oven temp error");
 
+////        this->oven_uart->write(a,8);
+////        qInfo("oven uart oven get temp send out");
+
+////        this->oven_uart->read(b,13);
+////        qInfo("oven uart oven get temp");
+//    }
+//    else{
+//        //this->oven_uart->write(a,8);
 //        this->oven_uart->write(a,8);
-//        qInfo("oven uart oven get temp send out");
+//        qInfo("oven uart oven get temp send out=====");
 
 //        this->oven_uart->read(b,13);
 //        qInfo("oven uart oven get temp");
-    }
-    else{
-        //this->oven_uart->write(a,8);
-        this->oven_uart->write(a,8);
-        qInfo("oven uart oven get temp send out=====");
+//        qInfo("I am here");
 
-        this->oven_uart->read(b,13);
-        qInfo("oven uart oven get temp");
-        qInfo("I am here");
+//    }
+//qInfo("I am here1");
+//    if(this->oven_uart->is_opened!=TRUE)
+//    {
+//        qInfo("oven uart is not open. get oven temp error");
+//    }
+//    else{
+//        //this->oven_uart->read(b,8);
+//        //this->oven_uart->read(b,12);
+//        qInfo("oven uart oven get temp");
+//    }
+//    qInfo("I am here2");
+//    //result = (b[3]*256+b[4])/100;
+//    qInfo("b[0]: %02x",b[0]);
+//    qInfo("b[1]: %02x",b[1]);
+//    qInfo("b[2]: %02x",b[2]);
+//    qInfo("b[3]: %02x",b[3]);
+//    qInfo("b[4]: %02x",b[4]);
+//    qInfo("b[5]: %02x",b[5]);
+//    qInfo("b[6]: %02x",b[6]);
+//    qInfo("b[7]: %02x",b[7]);
+//    qInfo("b[8]: %02x",b[8]);
+//    qInfo("b[9]: %02x",b[9]);
 
-    }
-qInfo("I am here1");
-    if(this->oven_uart->is_opened!=TRUE)
-    {
-        qInfo("oven uart is not open. get oven temp error");
-    }
-    else{
-        //this->oven_uart->read(b,8);
-        //this->oven_uart->read(b,12);
-        qInfo("oven uart oven get temp");
-    }
-    qInfo("I am here2");
-    //result = (b[3]*256+b[4])/100;
-    qInfo("b[0]: %02x",b[0]);
-    qInfo("b[1]: %02x",b[1]);
-    qInfo("b[2]: %02x",b[2]);
-    qInfo("b[3]: %02x",b[3]);
-    qInfo("b[4]: %02x",b[4]);
-    qInfo("b[5]: %02x",b[5]);
-    qInfo("b[6]: %02x",b[6]);
-    qInfo("b[7]: %02x",b[7]);
-    qInfo("b[8]: %02x",b[8]);
-    qInfo("b[9]: %02x",b[9]);
+//    result = (b[8]*256+b[9])*175.72/65536-46.85;
 
-    result = (b[8]*256+b[9])*175.72/65536-46.85;
-
-    return result;
+    //return result;
+    return 27.0;
 }
 
 
@@ -296,85 +297,85 @@ qInfo("I am here1");
 void myAgent::get_oven_temp2(double &result)
 {
 
-    //Byte a[8],b[8];
+//    //Byte a[8],b[8];
 
-    Byte a[8],b[13];
+//    Byte a[8],b[13];
 
-    //a[0] = 0x01;
-    //a[1] = 0x04;
-    //a[2] = 0x00;
-    //a[3] = 0x5e;
-    //a[4] = 0x00;
-    //a[5] = 0x01;
-    //a[6] = CRC16_MODBUS(a,6)>>8;
-    //a[7] = CRC16_MODBUS(a,6)&0xFF;
+//    //a[0] = 0x01;
+//    //a[1] = 0x04;
+//    //a[2] = 0x00;
+//    //a[3] = 0x5e;
+//    //a[4] = 0x00;
+//    //a[5] = 0x01;
+//    //a[6] = CRC16_MODBUS(a,6)>>8;
+//    //a[7] = CRC16_MODBUS(a,6)&0xFF;
 
-    this->oven_uart->PrintDCB();
 
-    a[0] = 0x01;
-    a[1] = 0x04;
-    a[2] = 0x00;
-    a[3] = 0x5b;
-    a[4] = 0x00;
-    a[5] = 0x04;
-    a[6] = 0x80;
-    a[7] = 0x1a;
 
-//    a[0] = 0x00;
-//    a[1] = 0x0a;
-//    a[2] = 0x6b;
-//    a[3] = 0x11;
-//    a[4] = 0x02;
-//    a[5] = 0x00;
-//    a[6] = 0x00;
-//    a[7] = 0x00;
-//    a[8] = 0xfe;
-//    a[9] = 0xff;
+//    a[0] = 0x01;
+//    a[1] = 0x04;
+//    a[2] = 0x00;
+//    a[3] = 0x5b;
+//    a[4] = 0x00;
+//    a[5] = 0x04;
+//    a[6] = 0x80;
+//    a[7] = 0x1a;
 
-    if(this->oven_uart->is_opened!=TRUE)
-    {
-        qInfo("oven uart is not open. get oven temp error");
+////    a[0] = 0x00;
+////    a[1] = 0x0a;
+////    a[2] = 0x6b;
+////    a[3] = 0x11;
+////    a[4] = 0x02;
+////    a[5] = 0x00;
+////    a[6] = 0x00;
+////    a[7] = 0x00;
+////    a[8] = 0xfe;
+////    a[9] = 0xff;
 
+//    if(this->oven_uart->is_opened!=TRUE)
+//    {
+//        qInfo("oven uart is not open. get oven temp error");
+
+////        this->oven_uart->write(a,8);
+////        qInfo("oven uart oven get temp send out");
+
+////        this->oven_uart->read(b,13);
+////        qInfo("oven uart oven get temp");
+//    }
+//    else{
+//        //this->oven_uart->write(a,8);
 //        this->oven_uart->write(a,8);
-//        qInfo("oven uart oven get temp send out");
+//        qInfo("oven uart oven get temp send out===2222==");
 
 //        this->oven_uart->read(b,13);
 //        qInfo("oven uart oven get temp");
-    }
-    else{
-        //this->oven_uart->write(a,8);
-        this->oven_uart->write(a,8);
-        qInfo("oven uart oven get temp send out===2222==");
+//        qInfo("I am here");
 
-        this->oven_uart->read(b,13);
-        qInfo("oven uart oven get temp");
-        qInfo("I am here");
+//    }
+//qInfo("I am here1");
+//    if(this->oven_uart->is_opened!=TRUE)
+//    {
+//        qInfo("oven uart is not open. get oven temp error");
+//    }
+//    else{
+//        //this->oven_uart->read(b,8);
+//        //this->oven_uart->read(b,12);
+//        qInfo("oven uart oven get temp");
+//    }
+//    qInfo("I am here2");
+//    //result = (b[3]*256+b[4])/100;
+//    qInfo("b[0]: %02x",b[0]);
+//    qInfo("b[1]: %02x",b[1]);
+//    qInfo("b[2]: %02x",b[2]);
+//    qInfo("b[3]: %02x",b[3]);
+//    qInfo("b[4]: %02x",b[4]);
+//    qInfo("b[5]: %02x",b[5]);
+//    qInfo("b[6]: %02x",b[6]);
+//    qInfo("b[7]: %02x",b[7]);
+//    qInfo("b[8]: %02x",b[8]);
+//    qInfo("b[9]: %02x",b[9]);
 
-    }
-qInfo("I am here1");
-    if(this->oven_uart->is_opened!=TRUE)
-    {
-        qInfo("oven uart is not open. get oven temp error");
-    }
-    else{
-        //this->oven_uart->read(b,8);
-        //this->oven_uart->read(b,12);
-        qInfo("oven uart oven get temp");
-    }
-    qInfo("I am here2");
-    //result = (b[3]*256+b[4])/100;
-    qInfo("b[0]: %02x",b[0]);
-    qInfo("b[1]: %02x",b[1]);
-    qInfo("b[2]: %02x",b[2]);
-    qInfo("b[3]: %02x",b[3]);
-    qInfo("b[4]: %02x",b[4]);
-    qInfo("b[5]: %02x",b[5]);
-    qInfo("b[6]: %02x",b[6]);
-    qInfo("b[7]: %02x",b[7]);
-    qInfo("b[8]: %02x",b[8]);
-    qInfo("b[9]: %02x",b[9]);
-
-    result = (b[8]*256+b[9])*175.72/65536-46.85;
+//    result = (b[8]*256+b[9])*175.72/65536-46.85;
 
 
     //return result;

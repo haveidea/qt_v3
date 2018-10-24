@@ -152,7 +152,7 @@ void  ab2coeff_demo(double a,double b, Byte * coeff){
 void update_coeff(float a, float b, Byte * coeff)
 {
 
-    qDebug("TODO: update_coeff");
+    qInfo("TODO: update_coeff");
 
 }*/
 void myMCUAgent::calc_coeff(int boardx, int boardy,int row,int col)
@@ -208,12 +208,12 @@ void myMCUAgent::run_once(float temp_set){
         //emit get_oven_temp2(temp2);
     //}while(abs(temp2-temp_set)>1.5);
 
-    execute_cmd_check_stable(temp_set);
+  //  execute_cmd_check_stable(temp_set);
 
     qInfo("Get temperature all");
     //execute_uart_cmd(0, 2, 0, 0, 0, 0, payload, 0); //get temp ref
     //get_ref(temp_set);
-    execute_uart_cmd_new(0, 2, 0, 0, 0, 0, payload, 0,temp_set); //get temp ref
+ //   execute_uart_cmd_new(0, 2, 0, 0, 0, 0, payload, 0,temp_set); //get temp ref
     execute_uart_cmd(0, 1, 0, 0, 0, 0, payload, 0); //get temp
 
     ///////////////////////////////////
@@ -240,7 +240,7 @@ void myMCUAgent::check_temp(float temp_set) {
     //execute_uart_cmd(0, 2, 0, 0, 0, 0, payload, 0); //get temp ref
     //execute_getref_cmd(0, 2, 0, 0, 0, 0, payload, 0, temp_set);
     //get_ref(temp_set);
-    execute_uart_cmd_new(0, 2, 0, 0, 0, 0, payload, 0,temp_set); //get temp ref
+ //   execute_uart_cmd_new(0, 2, 0, 0, 0, 0, payload, 0,temp_set); //get temp ref
 
     //execute_uart_cmd(0, 1, 0, 0, 0, 0, payload, 0); //get temp
     execute_temp_check();
@@ -266,7 +266,6 @@ void myMCUAgent::manual_check_temp_indoor() {
     ///////////////////////////////////
     qInfo("Check temp done");
     sleep(2000);
-
 }
 
 
@@ -276,11 +275,11 @@ void myMCUAgent::update_temp_plan(){
     {
         for(int j=0; j<NUM_DAUGHTER_BOARDS_X; j++)
         {
-            qDebug("update fknow x: %d, y:%d", j, i);
+            qInfo("update fknow x: %d, y:%d", j, i);
             fKnow[j][i][2] = map.ref_map[i *NUM_DAUGHTER_BOARDS_X + j].get_last_ref_temp();
         }
     }
-    qDebug("calc fret");
+    qInfo("calc fret");
     // MathBiCubic::CubicSplineEx2_ROW(fRet,NUM_DAUGHTER_BOARDS_X*NUM_CHIPS_X,NUM_DAUGHTER_BOARDS_Y*NUM_CHIPS_Y,fKnow,NUM_DAUGHTER_BOARDS_X,NUM_DAUGHTER_BOARDS_Y);
     //MathBiCubic::CubicSplineEx2_RowLine(fRet,NUM_DAUGHTER_BOARDS_X*NUM_CHIPS_X,NUM_DAUGHTER_BOARDS_Y*NUM_CHIPS_Y,fKnow,NUM_DAUGHTER_BOARDS_X,NUM_DAUGHTER_BOARDS_Y);
     for(int i=0; i<NUM_DAUGHTER_BOARDS_X; i++)
@@ -295,25 +294,25 @@ void myMCUAgent::update_temp_plan(){
             }
         }
     }
-    qDebug ("fRet2: %f     ",fRet[0][0][2]);
-    qDebug ("fRet1: %f     ",fRet[0][0][1]);
+    qInfo ("fRet2: %f     ",fRet[0][0][2]);
+    qInfo ("fRet1: %f     ",fRet[0][0][1]);
 
-    qDebug ("fRet0: %f     ",fRet[0][0][0]);
+    qInfo ("fRet0: %f     ",fRet[0][0][0]);
 
-    qDebug("calc fret done");
-    qDebug ("fknow pos x : %f %f",fKnow[0][0][0],fKnow[1][0][0]);
-    qDebug ("fknow pos y : %f %f",fKnow[0][0][1],fKnow[1][0][1]);
+    qInfo("calc fret done");
+    qInfo ("fknow pos x : %f %f",fKnow[0][0][0],fKnow[1][0][0]);
+    qInfo ("fknow pos y : %f %f",fKnow[0][0][1],fKnow[1][0][1]);
 
-    qDebug ("fknow: %f %f",fKnow[0][0][2],fKnow[1][0][2]);
+    qInfo ("fknow: %f %f",fKnow[0][0][2],fKnow[1][0][2]);
 
 
 
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
-    qDebug ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
+    qInfo ("fRet: %f     ",fRet[0][0][0]);
     //,fRet[1][0][0],
     //            fRet[2][0][0],fRet[3][0][0],
     //            fRet[4][0][0],fRet[5][0][0],
@@ -325,7 +324,7 @@ void myMCUAgent::update_temp_plan(){
     //            fRet[15][0][0],fRet[17][0][0],
     //            fRet[18][0][0],fRet[19][0][0]
     //);
-    qDebug ("fRet: %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f",fRet[0][0][2],fRet[1][0][2],
+    qInfo ("fRet: %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f",fRet[0][0][2],fRet[1][0][2],
             fRet[2][0][2],fRet[3][0][2],
             fRet[4][0][2],fRet[5][0][2],
             fRet[6][0][2],fRet[7][0][2],
@@ -336,7 +335,7 @@ void myMCUAgent::update_temp_plan(){
             fRet[15][0][2],fRet[17][0][2],
             fRet[18][0][2],fRet[19][0][2]
             );
-    qDebug ("fRet: %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f",fRet[0][9][2],fRet[1][9][2],
+    qInfo ("fRet: %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f  %f %f %f %f %f",fRet[0][9][2],fRet[1][9][2],
             fRet[2][9][2],fRet[3][9][2],
             fRet[4][9][2],fRet[5][9][2],
             fRet[6][9][2],fRet[7][9][2],
@@ -386,6 +385,7 @@ void myMCUAgent::check_parameters(){
     execute_uart_cmd(0, 4, 0, 0, 0, 0, payload, 0); //read rom
     execute_uart_cmd(0, 6, 0, 0, 0, 0, payload, 0); //read parameter
     execute_uart_cmd(0, 7, 0, 0, 0, 0, payload, 0); //read scratchpad
+
 }
 
 void myMCUAgent::set_coeff(){
@@ -394,10 +394,11 @@ void myMCUAgent::set_coeff(){
 
     qInfo("Begin to calculate coeff...");
     execute_uart_cmd(0, 5, 0, 0, 0, 0, payload, 0); //set coeff
+
 }
 
 void myMCUAgent::update_map( Byte * buffer, unsigned int len){
-    qDebug()<<"TODO";
+    qInfo()<<"TODO";
     // map.set_chip_state(0,0,0,0,GOOD);
     //    map.set_chip_state(1,1,0,0,BAD);
 }
@@ -408,404 +409,427 @@ void  myMCUAgent::execute_uart_cmd(int sel, int cmd, int boardx, int boardy,int 
     int send_len;
     int sample_count = 1;
 
-    if(cmd == 1 || cmd == 2)
-        sample_count = 10;
-    else
-        sample_count = 1;
+    qInfo()<<"======== here";
+    send_len = 10;
+    char_cmd = (Byte *)malloc(100*sizeof(Byte));
 
-    if(sel == 0 && (cmd !=0 && cmd != 2 && cmd != 3)) {
-        qDebug("select all");
-        int sel_inner = 1;
-
-        //for(int ii=0; ii<sample_count; ii++)
-        //for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
-        //for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
-        for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
-            for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
-                qDebug("%d %d %d %d %d %d",sel_inner,cmd,bx,by,row,col);
-
-                for(int iii=0; iii<sample_count; iii++) {
-                    //qInfo("CMD run the %d time.",iii+1);
-
-                    if (cmd == 5) // set coeff
-                    {
-                        // when execute set coeff, suppose the coeffs are already in chip map.
-                        for (int ii = 0;ii < 10; ii++)
-                        {
-                            for (int jj = 0; jj < 10; jj ++)
-                            {
-                                calc_coeff(bx,by,ii,(9-jj));
-                            }
-
-                        }
-                        //calc_coeff()
-                        Byte  payload_new[300] ;
-                        for (int i =0; i < 10; i++)
-                        {
-                            for (int j = 0; j < 10; j++)
-                            {
-                                payload_new[(i*10 + j)*3 +0] = map.map[bx][by][i][(9-j)].coeff.coeff[0];
-                                payload_new[(i*10 + j)*3 +1] = map.map[bx][by][i][(9-j)].coeff.coeff[1];
-                                payload_new[(i*10 + j)*3 +2] = map.map[bx][by][i][(9-j)].coeff.coeff[2];
-                            }
-                        }
-                        int payload_len_new = 300;
-                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
-
-                    }
-                    else{
-                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload,  payload_len, char_cmd, &send_len);
-                    }
-
-                    for(int ii = 0; ii < send_len; ii++)
-                    {
-                        qDebug("%02x",char_cmd[ii]);
-                    }
-
-                    //   if(this->mcu_uart->is_opened!=TRUE)
-                    if(this->mcu_uart->open()!=TRUE)
-                    {
-                        s_errorbox("cmd execute error, uart is not opened");
-                        return;
-                    }
-
-                    for(int ii = 0; ii < send_len; ii++)
-                    {
-                        qDebug("len %02x",char_cmd[ii]);
-                    }
+    char_cmd[0] = 0x00;
+    char_cmd[1] = 0x0a;
+    char_cmd[2] = 0x7c;
+    char_cmd[3] = 0x11;
+    char_cmd[4] = 0x01;
+    char_cmd[5] = 0x05;
+    char_cmd[6] = 0x01;
+    char_cmd[7] = 0x01;
+    char_cmd[8] = 0xfe;
+    char_cmd[9] = 0xff;
+    this->mcu_uart->write(char_cmd,send_len);
 
 
-                    this->mcu_uart->write(char_cmd,send_len);
-                    delete char_cmd;
 
-                    if(this->mcu_uart->read(response_len,2) == false)
-                    {
-                        qDebug("mcu uart comand failed due to read timeout");
-                        return ;
-                    }
+//    if(cmd == 1 || cmd == 2)
+//        sample_count = 10;
+//    else
+//        sample_count = 1;
+//    qInfo("======== here123:sel  %d, cmd %d", sel, cmd);
 
-                    uint res_len = response_len[0] * 256 + response_len[1]-2;
-                    Byte * response_res;
-                    qDebug("need to read %d data", res_len);
-                    // exit(0);
-                    qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-                    //exit(0);
+//    if(sel == 0 && (cmd !=0 && cmd != 2 && cmd != 3)) {
+//        qInfo("=========select all");
+//        qInfo()<<"======== here1";
 
-                    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-                    if(this->mcu_uart->read(response_res,res_len) == false)
-                    {
-                        qDebug("mcu uart comand failed due to read timeout");
-                        return ;
-                    }
-                    qDebug("before parsing [0]:%02x", response_len[0]);
-                    qDebug("before parsing [1]:%02x", response_len[1]);
-                    for(uint ii = 0; ii < res_len; ii++){
-                        qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-                    }
-                    parsing_response(response_res, 1);
-                }
-            }
-        }
-    }
-    else {
-        qDebug("not select all");
-
-        for(int ii=0; ii<sample_count; ii++) {
-            qDebug("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
-            if (cmd == 5) // set coeff
-            {
-                // when execute set coeff, suppose the coeffs are already in chip map.
-                for (int ii = 0;ii < 10; ii++)
-                {
-                    for (int jj = 0; jj < 10; jj ++)
-                    {
-                        calc_coeff(boardx,boardy,ii,(9-jj));
-                    }
-
-                }
-                //calc_coeff()
-                Byte  payload_new[300] ;
-                for (int i =0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        payload_new[(i*10 + j)*3 +0] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[0];
-                        payload_new[(i*10 + j)*3 +1] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[1];
-                        payload_new[(i*10 + j)*3 +2] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[2];
-                    }
-                }
-                int payload_len_new = 300;
-                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
-
-            }
-            else{
-                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
-            }
-
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("%02x",char_cmd[ii]);
-            }
-
-            //   if(this->mcu_uart->is_opened!=TRUE)
-            if(this->mcu_uart->open()!=TRUE)
-            {
-                s_errorbox("cmd execute error, uart is not opened");
-                return;
-            }
-
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("len %02x",char_cmd[ii]);
-            }
-
-
-            this->mcu_uart->write(char_cmd,send_len);
-            delete char_cmd;
-
-            if(this->mcu_uart->read(response_len,2) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
-
-            uint res_len = response_len[0] * 256 + response_len[1]-2;
-            Byte * response_res;
-            qDebug("need to read %d data", res_len);
-            // exit(0);
-            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-            //exit(0);
-
-            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-            if(this->mcu_uart->read(response_res,res_len) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
-            qDebug("before parsing [0]:%02x", response_len[0]);
-            qDebug("before parsing [1]:%02x", response_len[1]);
-            for(uint ii = 0; ii < res_len; ii++){
-                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-            }
-            parsing_response(response_res, 0);
-
-        }
-    }
-}
-
-
-void  myMCUAgent::execute_uart_cmd_new(int sel, int cmd, int boardx, int boardy,int row,int col,Byte* payload, int payload_len, float temp_set){
-    Byte * char_cmd;
-    Byte response_len[2];
-    int send_len;
-    int sample_count = 1;
-
-    vector<vector<float>> resultSet;
-    vector<float> vec;
-    vector<float> ref;
-    bool ready = FALSE;
-
-    resultSet.resize(15);
-
-    for (int i = 0; i < resultSet.size(); i++) {
-        resultSet[i].resize(20);
-        //qInfo("i: %d", i);
-    }
-
-    if(cmd == 1)
-        sample_count = 10;
-    else if(cmd == 2)
-        sample_count = 20;
-    else
-        sample_count = 1;
-
-    if(sel == 0 && (cmd !=0 && cmd != 3)) {
-        qDebug("select all");
-        int sel_inner = 1;
+//        int sel_inner = 1;
 
         //for(int ii=0; ii<sample_count; ii++)
         //for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
         //for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
-        for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
-            for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
-                qDebug("%d %d %d %d %d %d",sel_inner,cmd,bx,by,row,col);
+//        for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
+//            for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
+//                qInfo("=======%d %d %d %d %d %d",sel_inner,cmd,bx,by,row,col);
+
+//                for(int iii=0; iii<sample_count; iii++) {
+//                    //qInfo("CMD run the %d time.",iii+1);
+//                    if (cmd == 5) // set coeff
+//                    {
+//                        // when execute set coeff, suppose the coeffs are already in chip map.
+//                        for (int ii = 0;ii < 10; ii++)
+//                        {
+//                            for (int jj = 0; jj < 10; jj ++)
+//                            {
+//                                calc_coeff(bx,by,ii,(9-jj));
+//                            }
+
+//                        }
+
+//                        //calc_coeff()
+//                        Byte  payload_new[300] ;
+//                        for (int i =0; i < 10; i++)
+//                        {
+//                            for (int j = 0; j < 10; j++)
+//                            {
+//                                qInfo()<<"======== here333";
+//                                payload_new[(i*10 + j)*3 +0] = map.map[bx][by][i][(9-j)].coeff.coeff[0];
+//                                qInfo()<<"======== here444";
+//                                payload_new[(i*10 + j)*3 +1] = map.map[bx][by][i][(9-j)].coeff.coeff[1];
+//                                payload_new[(i*10 + j)*3 +2] = map.map[bx][by][i][(9-j)].coeff.coeff[2];
+//                            }
+//                        }
+//                               qInfo()<<"======== here3";
+//                        int payload_len_new = 300;
+//                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
+
+//                    }
+//                    else{
+//                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//                    }
+
+//                    for(int ii = 0; ii < send_len; ii++)
+//                    {
+//                        qInfo("%02x",char_cmd[ii]);
+//                    }
+
+//                    //   if(this->mcu_uart->is_opened!=TRUE)
+//                    if(this->mcu_uart->open()!=TRUE)
+//                    {
+//                        s_errorbox("cmd execute error, uart is not opened");
+//                        return;
+//                    }
+
+//                    for(int ii = 0; ii < send_len; ii++)
+//                    {
+//                        qInfo("len %02x",char_cmd[ii]);
+//                    }
 
 
+//                    this->mcu_uart->write(char_cmd,send_len);
+//                    delete char_cmd;
 
-                for(int iii=0; iii<sample_count; iii++) {
-                    //qInfo("CMD run the %d time.",iii+1);
-                    if(by==NUM_DAUGHTER_BOARDS_Y-1 && bx==NUM_DAUGHTER_BOARDS_X-1 && iii == sample_count-1) {
-                       ready = TRUE;
-                    }
-                    else {
-                        ready = FALSE;
-                    }
+//                    if(this->mcu_uart->read(response_len,2) == false)
+//                    {
+//                        qInfo("mcu uart comand failed due to read timeout");
+//                        return ;
+//                    }
+//                    uint res_len = response_len[0] * 256 + response_len[1]-2;
+//                    Byte * response_res;
+//                    qInfo("need to read %d data", res_len);
+//                    // exit(0);
+//                    qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//                    //exit(0);
 
-                    if (cmd == 5) // set coeff
-                    {
-                        // when execute set coeff, suppose the coeffs are already in chip map.
-                        for (int ii = 0;ii < 10; ii++)
-                        {
-                            for (int jj = 0; jj < 10; jj ++)
-                            {
-                                calc_coeff(bx,by,ii,(9-jj));
-                            }
+//                    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//                    if(this->mcu_uart->read(response_res,res_len) == false)
+//                    {
+//                        qInfo("mcu uart comand failed due to read timeout");
+//                        return ;
+//                    }
+//                    qInfo("before parsing [0]:%02x", response_len[0]);
+//                    qInfo("before parsing [1]:%02x", response_len[1]);
+//                    for(uint ii = 0; ii < res_len; ii++){
+//                        qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//                    }
+//                    parsing_response(response_res, 1);
+//                }
+//            }
+//        }
+//    }
+//    else {
+//        qInfo("not select all");
+//        qInfo()<<"======== here2";
 
-                        }
-                        //calc_coeff()
-                        Byte  payload_new[300] ;
-                        for (int i =0; i < 10; i++)
-                        {
-                            for (int j = 0; j < 10; j++)
-                            {
-                                payload_new[(i*10 + j)*3 +0] = map.map[bx][by][i][(9-j)].coeff.coeff[0];
-                                payload_new[(i*10 + j)*3 +1] = map.map[bx][by][i][(9-j)].coeff.coeff[1];
-                                payload_new[(i*10 + j)*3 +2] = map.map[bx][by][i][(9-j)].coeff.coeff[2];
-                            }
-                        }
-                        int payload_len_new = 300;
-                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
+//        for(int ii=0; ii<sample_count; ii++) {
+//            qInfo("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
+//            if (cmd == 5) // set coeff
+//            {
+//                // when execute set coeff, suppose the coeffs are already in chip map.
+//                for (int ii = 0;ii < 10; ii++)
+//                {
+//                    for (int jj = 0; jj < 10; jj ++)
+//                    {
+//                        calc_coeff(boardx,boardy,ii,(9-jj));
+//                    }
 
-                    }
-                    else{
-                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload,  payload_len, char_cmd, &send_len);
-                    }
+//                }
+//                //calc_coeff()
+//                Byte  payload_new[300] ;
+//                for (int i =0; i < 10; i++)
+//                {
+//                    for (int j = 0; j < 10; j++)
+//                    {
+//                        payload_new[(i*10 + j)*3 +0] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[0];
+//                        payload_new[(i*10 + j)*3 +1] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[1];
+//                        payload_new[(i*10 + j)*3 +2] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[2];
+//                    }
+//                }
+//                int payload_len_new = 300;
+//                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
 
-                    for(int ii = 0; ii < send_len; ii++)
-                    {
-                        qDebug("%02x",char_cmd[ii]);
-                    }
+//            }
+//            else{
+//                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//            }
+//            qInfo()<<"======== here2";
+//            for(int ii = 0; ii < send_len; ii++)
+//            {
+//                qInfo("%02x",char_cmd[ii]);
+//            }
 
-                    //   if(this->mcu_uart->is_opened!=TRUE)
-                    if(this->mcu_uart->open()!=TRUE)
-                    {
-                        s_errorbox("cmd execute error, uart is not opened");
-                        return;
-                    }
+//            //   if(this->mcu_uart->is_opened!=TRUE)
+////            if(this->mcu_uart->open()!=TRUE)
+////            {
+////                s_errorbox("cmd execute error, uart is not opened");
+////                return;
+////            }
 
-                    for(int ii = 0; ii < send_len; ii++)
-                    {
-                        qDebug("len %02x",char_cmd[ii]);
-                    }
-
-
-                    this->mcu_uart->write(char_cmd,send_len);
-                    delete char_cmd;
-
-                    if(this->mcu_uart->read(response_len,2) == false)
-                    {
-                        qDebug("mcu uart comand failed due to read timeout");
-                        return ;
-                    }
-
-                    uint res_len = response_len[0] * 256 + response_len[1]-2;
-                    Byte * response_res;
-                    qDebug("need to read %d data", res_len);
-                    // exit(0);
-                    qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-                    //exit(0);
-
-                    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-                    if(this->mcu_uart->read(response_res,res_len) == false)
-                    {
-                        qDebug("mcu uart comand failed due to read timeout");
-                        return ;
-                    }
-                    qDebug("before parsing [0]:%02x", response_len[0]);
-                    qDebug("before parsing [1]:%02x", response_len[1]);
-                    for(uint ii = 0; ii < res_len; ii++){
-                        qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-                    }
-                    parsing_response_new(response_res, 1, iii, resultSet,vec, ref,temp_set, ready);
-                }
-            }
-        }
-    }
-    else {
-        qDebug("not select all");
-
-        for(int ii=0; ii<sample_count; ii++) {
-            qDebug("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
-            if (cmd == 5) // set coeff
-            {
-                // when execute set coeff, suppose the coeffs are already in chip map.
-                for (int ii = 0;ii < 10; ii++)
-                {
-                    for (int jj = 0; jj < 10; jj ++)
-                    {
-                        calc_coeff(boardx,boardy,ii,(9-jj));
-                    }
-
-                }
-                //calc_coeff()
-                Byte  payload_new[300] ;
-                for (int i =0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        payload_new[(i*10 + j)*3 +0] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[0];
-                        payload_new[(i*10 + j)*3 +1] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[1];
-                        payload_new[(i*10 + j)*3 +2] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[2];
-                    }
-                }
-                int payload_len_new = 300;
-                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
-
-            }
-            else{
-                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
-            }
-
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("%02x",char_cmd[ii]);
-            }
-
-            //   if(this->mcu_uart->is_opened!=TRUE)
-            if(this->mcu_uart->open()!=TRUE)
-            {
-                s_errorbox("cmd execute error, uart is not opened");
-                return;
-            }
-
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("len %02x",char_cmd[ii]);
-            }
+//            for(int ii = 0; ii < send_len; ii++)
+//            {
+//                qInfo("len %02x",char_cmd[ii]);
+//            }
 
 
-            this->mcu_uart->write(char_cmd,send_len);
-            delete char_cmd;
+//            this->mcu_uart->write(char_cmd,send_len);
+//            delete char_cmd;
 
-            if(this->mcu_uart->read(response_len,2) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
+////            if(this->mcu_uart->read(response_len,2) == false)
+////            {
+////                qInfo("mcu uart comand failed due to read timeout");
+////                return ;
+////            }
 
-            uint res_len = response_len[0] * 256 + response_len[1]-2;
-            Byte * response_res;
-            qDebug("need to read %d data", res_len);
-            // exit(0);
-            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-            //exit(0);
+////            uint res_len = response_len[0] * 256 + response_len[1]-2;
+////            Byte * response_res;
+////            qInfo("need to read %d data", res_len);
+////            // exit(0);
+////            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+////            //exit(0);
 
-            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-            if(this->mcu_uart->read(response_res,res_len) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
-            qDebug("before parsing [0]:%02x", response_len[0]);
-            qDebug("before parsing [1]:%02x", response_len[1]);
-            for(uint ii = 0; ii < res_len; ii++){
-                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-            }
-            parsing_response_new(response_res, 0, ii, resultSet, vec, ref, temp_set, ready);
+////            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+////            if(this->mcu_uart->read(response_res,res_len) == false)
+////            {
+////                qInfo("mcu uart comand failed due to read timeout");
+////                return ;
+////            }
+////            qInfo("before parsing [0]:%02x", response_len[0]);
+////            qInfo("before parsing [1]:%02x", response_len[1]);
+////            for(uint ii = 0; ii < res_len; ii++){
+////                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+////            }
+//         //   parsing_response(response_res, 0);
 
-        }
-    }
+//        }
+//    }
 }
+
+//void  myMCUAgent::execute_uart_cmd_new(int sel, int cmd, int boardx, int boardy,int row,int col,Byte* payload, int payload_len, float temp_set){
+//    Byte * char_cmd;
+//    Byte response_len[2];
+//    int send_len;
+//    int sample_count = 1;
+
+//    vector<vector<float>> resultSet;
+//    vector<float> vec;
+//    vector<float> ref;
+//    bool ready = FALSE;
+
+//    resultSet.resize(15);
+
+//    for (int i = 0; i < resultSet.size(); i++) {
+//        resultSet[i].resize(20);
+//        //qInfo("i: %d", i);
+//    }
+
+//    if(cmd == 1)
+//        sample_count = 10;
+//    else if(cmd == 2)
+//        sample_count = 20;
+//    else
+//        sample_count = 1;
+
+//    if(sel == 0 && (cmd !=0 && cmd != 3)) {
+//        qInfo("select all");
+//        int sel_inner = 1;
+
+//        //for(int ii=0; ii<sample_count; ii++)
+//        //for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
+//        //for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
+//        for(int by=0; by<NUM_DAUGHTER_BOARDS_Y; by++) {
+//            for(int bx=0; bx<NUM_DAUGHTER_BOARDS_X; bx++) {
+//                qInfo("%d %d %d %d %d %d",sel_inner,cmd,bx,by,row,col);
+
+
+
+//                for(int iii=0; iii<sample_count; iii++) {
+//                    //qInfo("CMD run the %d time.",iii+1);
+//                    if(by==NUM_DAUGHTER_BOARDS_Y-1 && bx==NUM_DAUGHTER_BOARDS_X-1 && iii == sample_count-1) {
+//                       ready = TRUE;
+//                    }
+//                    else {
+//                        ready = FALSE;
+//                    }
+
+//                    if (cmd == 5) // set coeff
+//                    {
+//                        // when execute set coeff, suppose the coeffs are already in chip map.
+//                        for (int ii = 0;ii < 10; ii++)
+//                        {
+//                            for (int jj = 0; jj < 10; jj ++)
+//                            {
+//                                calc_coeff(bx,by,ii,(9-jj));
+//                            }
+
+//                        }
+//                        //calc_coeff()
+//                        Byte  payload_new[300] ;
+//                        for (int i =0; i < 10; i++)
+//                        {
+//                            for (int j = 0; j < 10; j++)
+//                            {
+//                                payload_new[(i*10 + j)*3 +0] = map.map[bx][by][i][(9-j)].coeff.coeff[0];
+//                                payload_new[(i*10 + j)*3 +1] = map.map[bx][by][i][(9-j)].coeff.coeff[1];
+//                                payload_new[(i*10 + j)*3 +2] = map.map[bx][by][i][(9-j)].coeff.coeff[2];
+//                            }
+//                        }
+//                        int payload_len_new = 300;
+//                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
+
+//                    }
+//                    else{
+//                        pack_cmd(sel_inner, cmd, by*NUM_DAUGHTER_BOARDS_X + bx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//                    }
+
+//                    for(int ii = 0; ii < send_len; ii++)
+//                    {
+//                        qInfo("%02x",char_cmd[ii]);
+//                    }
+
+//                    //   if(this->mcu_uart->is_opened!=TRUE)
+//                    if(this->mcu_uart->open()!=TRUE)
+//                    {
+//                        s_errorbox("cmd execute error, uart is not opened");
+//                        return;
+//                    }
+
+//                    for(int ii = 0; ii < send_len; ii++)
+//                    {
+//                        qInfo("len %02x",char_cmd[ii]);
+//                    }
+
+
+//                    this->mcu_uart->write(char_cmd,send_len);
+//                    delete char_cmd;
+
+//                    if(this->mcu_uart->read(response_len,2) == false)
+//                    {
+//                        qInfo("mcu uart comand failed due to read timeout");
+//                        return ;
+//                    }
+
+//                    uint res_len = response_len[0] * 256 + response_len[1]-2;
+//                    Byte * response_res;
+//                    qInfo("need to read %d data", res_len);
+//                    // exit(0);
+//                    qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//                    //exit(0);
+
+//                    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//                    if(this->mcu_uart->read(response_res,res_len) == false)
+//                    {
+//                        qInfo("mcu uart comand failed due to read timeout");
+//                        return ;
+//                    }
+//                    qInfo("before parsing [0]:%02x", response_len[0]);
+//                    qInfo("before parsing [1]:%02x", response_len[1]);
+//                    for(uint ii = 0; ii < res_len; ii++){
+//                        qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//                    }
+//                    parsing_response_new(response_res, 1, iii, resultSet,vec, ref,temp_set, ready);
+//                }
+//            }
+//        }
+//    }
+//    else {
+//        qInfo("not select all");
+
+//        for(int ii=0; ii<sample_count; ii++) {
+//            qInfo("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
+//            if (cmd == 5) // set coeff
+//            {
+//                // when execute set coeff, suppose the coeffs are already in chip map.
+//                for (int ii = 0;ii < 10; ii++)
+//                {
+//                    for (int jj = 0; jj < 10; jj ++)
+//                    {
+//                        calc_coeff(boardx,boardy,ii,(9-jj));
+//                    }
+
+//                }
+//                //calc_coeff()
+//                Byte  payload_new[300] ;
+//                for (int i =0; i < 10; i++)
+//                {
+//                    for (int j = 0; j < 10; j++)
+//                    {
+//                        payload_new[(i*10 + j)*3 +0] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[0];
+//                        payload_new[(i*10 + j)*3 +1] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[1];
+//                        payload_new[(i*10 + j)*3 +2] = map.map[boardx][boardy][i][(9-j)].coeff.coeff[2];
+//                    }
+//                }
+//                int payload_len_new = 300;
+//                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload_new,  payload_len_new, char_cmd, &send_len);
+
+//            }
+//            else{
+//                pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//            }
+
+//            for(int ii = 0; ii < send_len; ii++)
+//            {
+//                qInfo("%02x",char_cmd[ii]);
+//            }
+
+//            //   if(this->mcu_uart->is_opened!=TRUE)
+//            if(this->mcu_uart->open()!=TRUE)
+//            {
+//                s_errorbox("cmd execute error, uart is not opened");
+//                return;
+//            }
+
+//            for(int ii = 0; ii < send_len; ii++)
+//            {
+//                qInfo("len %02x",char_cmd[ii]);
+//            }
+
+
+//            this->mcu_uart->write(char_cmd,send_len);
+//            delete char_cmd;
+
+//            if(this->mcu_uart->read(response_len,2) == false)
+//            {
+//                qInfo("mcu uart comand failed due to read timeout");
+//                return ;
+//            }
+
+//            uint res_len = response_len[0] * 256 + response_len[1]-2;
+//            Byte * response_res;
+//            qInfo("need to read %d data", res_len);
+//            // exit(0);
+//            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//            //exit(0);
+
+//            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//            if(this->mcu_uart->read(response_res,res_len) == false)
+//            {
+//                qInfo("mcu uart comand failed due to read timeout");
+//                return ;
+//            }
+//            qInfo("before parsing [0]:%02x", response_len[0]);
+//            qInfo("before parsing [1]:%02x", response_len[1]);
+//            for(uint ii = 0; ii < res_len; ii++){
+//                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//            }
+//            parsing_response_new(response_res, 0, ii, resultSet, vec, ref, temp_set, ready);
+
+//        }
+//    }
+//}
 
 
 
@@ -833,7 +857,7 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
     int row;
     int col;
     //Byte * payload;
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -851,43 +875,43 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else if((response[1] == 0x14) && (response[2] ==0x00)) {
         cmd = ow_getpara;
-        qDebug("ow_getpara response");
+        qInfo("ow_getpara response");
     }
     else if((response[1] == 0x14) && (response[2] ==0x01)) {
         cmd = ow_getscrpad;
-        qDebug("ow_getscrpad response");
+        qInfo("ow_getscrpad response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -899,7 +923,7 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
     col   = response[5];
     // valid check
     if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        qDebug("gettemp_ref should sel all or board");
+        qInfo("gettemp_ref should sel all or board");
         return false;
     }
     // function
@@ -928,7 +952,7 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
                     temp_ref[0] = response[6+(ii*NUM_DAUGHTER_BOARDS_X +jj)*2];
                     temp_ref[1] = response[6+(ii*NUM_DAUGHTER_BOARDS_X +jj)*2+1];
                     f_temp_ref = convert_reftemp(temp_ref);
-                    qDebug("i ma here");
+                    qInfo("i ma here");
                     map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(f_temp_ref,f_temp_ref);
                     ref_vec.push_back(f_temp_ref);
 
@@ -994,12 +1018,12 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
             temp_ref[0] = response[6];
             temp_ref[1] = response[7];
             f_temp_ref = convert_reftemp(temp_ref);
-            qDebug("i ma here");
+            qInfo("i ma here");
             map.ref_map[boardx*NUM_DAUGHTER_BOARDS_X +boardy].update_temp_record(f_temp_ref,f_temp_ref);
             sleep(100);
         }
 
-        qDebug("update temtemp plan");
+        qInfo("update temtemp plan");
 
         if(sel == all)
             update_temp_plan();
@@ -1008,7 +1032,7 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
     {
         if(sel == all)
         {
-            qDebug("i'm here 000");
+            qInfo("i'm here 000");
             for(int ii = 0; ii<NUM_DAUGHTER_BOARDS_Y;ii++){
                 for(int jj = 0; jj<NUM_DAUGHTER_BOARDS_X;jj++){
                     for(int kk = 0; kk<NUM_CHIPS_Y;kk++){
@@ -1017,10 +1041,10 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
                             temp[1] = response[6+((ii*NUM_DAUGHTER_BOARDS_X +jj) * (NUM_CHIPS_X * NUM_CHIPS_Y) + kk * NUM_CHIPS_X + ll)*2 +1];
                             //     mcu_uart->read_temp_board(ii);
                             // not correct, to be modify, TODO: temp is Byte, need to convert to float.
-                            qDebug("set chip state boardx: %02x", jj);
-                            qDebug("set chip state boardy: %02x", ii);
-                            qDebug("set chip state row: %02x", kk);
-                            qDebug("set chip state col: %02x", ll);
+                            qInfo("set chip state boardx: %02x", jj);
+                            qInfo("set chip state boardy: %02x", ii);
+                            qInfo("set chip state row: %02x", kk);
+                            qInfo("set chip state col: %02x", ll);
 
                             map.update_temp_record(ii, jj,kk,ll,fRet[jj * NUM_CHIPS_X +ll][ii*NUM_CHIPS_Y+kk][2],convert_temp(temp));
                         }
@@ -1224,29 +1248,29 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
                 rom[6] = response[6+kk*8 +6];
                 rom[7] = response[6+kk*8 +7];
 
-                qDebug("rom[0]:%02x", rom[0]);
-                qDebug("rom[1]:%02x", rom[1]);
-                qDebug("rom[2]:%02x", rom[2]);
-                qDebug("rom[3]:%02x", rom[3]);
-                qDebug("rom[4]:%02x", rom[4]);
-                qDebug("rom[5]:%02x", rom[5]);
-                qDebug("rom[6]:%02x", rom[6]);
-                qDebug("rom[7]:%02x", rom[7]);
+                qInfo("rom[0]:%02x", rom[0]);
+                qInfo("rom[1]:%02x", rom[1]);
+                qInfo("rom[2]:%02x", rom[2]);
+                qInfo("rom[3]:%02x", rom[3]);
+                qInfo("rom[4]:%02x", rom[4]);
+                qInfo("rom[5]:%02x", rom[5]);
+                qInfo("rom[6]:%02x", rom[6]);
+                qInfo("rom[7]:%02x", rom[7]);
 
                 if(rom[7] != 0x28 || rom[1] != 0x00)
                 {
                    map.set_chip_state(boardx,boardy,kk,row,BAD);
-                   qDebug("set chip state boardx: %02x", boardx);
-                   qDebug("set chip state boardy: %02x", boardy);
-                   qDebug("set chip state row: %02x", row);
-                   qDebug("set chip state col: %02x", col);
+                   qInfo("set chip state boardx: %02x", boardx);
+                   qInfo("set chip state boardy: %02x", boardy);
+                   qInfo("set chip state row: %02x", row);
+                   qInfo("set chip state col: %02x", col);
                 }
                 else {
                    map.set_chip_state(boardx,boardy,kk,row,GOOD);
-                   qDebug("set chip state boardx: %02x", boardx);
-                   qDebug("set chip state boardy: %02x", boardy);
-                   qDebug("set chip state row: %02x", row);
-                   qDebug("set chip state col: %02x", col);
+                   qInfo("set chip state boardx: %02x", boardx);
+                   qInfo("set chip state boardy: %02x", boardy);
+                   qInfo("set chip state row: %02x", row);
+                   qInfo("set chip state col: %02x", col);
                 }
                 // Save to some structure TODO
                 map.update_rom_record(boardx, boardy,kk,row,rom);
@@ -1292,29 +1316,29 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
             if(selAll == 0)
                 map.reset_chip_state();
 
-            qDebug("rom[0]:%02x", rom[0]);
-            qDebug("rom[1]:%02x", rom[1]);
-            qDebug("rom[2]:%02x", rom[2]);
-            qDebug("rom[3]:%02x", rom[3]);
-            qDebug("rom[4]:%02x", rom[4]);
-            qDebug("rom[5]:%02x", rom[5]);
-            qDebug("rom[6]:%02x", rom[6]);
-            qDebug("rom[7]:%02x", rom[7]);
+            qInfo("rom[0]:%02x", rom[0]);
+            qInfo("rom[1]:%02x", rom[1]);
+            qInfo("rom[2]:%02x", rom[2]);
+            qInfo("rom[3]:%02x", rom[3]);
+            qInfo("rom[4]:%02x", rom[4]);
+            qInfo("rom[5]:%02x", rom[5]);
+            qInfo("rom[6]:%02x", rom[6]);
+            qInfo("rom[7]:%02x", rom[7]);
 
             if(rom[7] != 0x28 || rom[1] != 0x00)
             {
                map.set_chip_state(boardx,boardy,row,col,BAD);
-               qDebug("set chip state boardx: %02x", boardx);
-               qDebug("set chip state boardy: %02x", boardy);
-               qDebug("set chip state row: %02x", row);
-               qDebug("set chip state col: %02x", col);
+               qInfo("set chip state boardx: %02x", boardx);
+               qInfo("set chip state boardy: %02x", boardy);
+               qInfo("set chip state row: %02x", row);
+               qInfo("set chip state col: %02x", col);
             }
             else {
                map.set_chip_state(boardx,boardy,row,col,GOOD);
-               qDebug("set chip state boardx: %02x", boardx);
-               qDebug("set chip state boardy: %02x", boardy);
-               qDebug("set chip state row: %02x", row);
-               qDebug("set chip state col: %02x", col);
+               qInfo("set chip state boardx: %02x", boardx);
+               qInfo("set chip state boardy: %02x", boardy);
+               qInfo("set chip state row: %02x", row);
+               qInfo("set chip state col: %02x", col);
             }
             // Save to some structure TODO
             map.update_rom_record(boardx, boardy,row,col,rom);
@@ -1451,8 +1475,8 @@ bool myMCUAgent::parsing_response(Byte * response_a, int selAll)
         sleep(100);
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
     return true;
 }
@@ -1484,7 +1508,7 @@ bool myMCUAgent::parsing_response_new(Byte * response_a, int selAll, int count, 
     int row;
     int col;
     //Byte * payload;
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -1502,43 +1526,43 @@ bool myMCUAgent::parsing_response_new(Byte * response_a, int selAll, int count, 
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else if((response[1] == 0x14) && (response[2] ==0x00)) {
         cmd = ow_getpara;
-        qDebug("ow_getpara response");
+        qInfo("ow_getpara response");
     }
     else if((response[1] == 0x14) && (response[2] ==0x01)) {
         cmd = ow_getscrpad;
-        qDebug("ow_getscrpad response");
+        qInfo("ow_getscrpad response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -1550,7 +1574,7 @@ bool myMCUAgent::parsing_response_new(Byte * response_a, int selAll, int count, 
     col   = response[5];
     // valid check
     if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        qDebug("gettemp_ref should sel all or board");
+        qInfo("gettemp_ref should sel all or board");
         return false;
     }
     // function
@@ -1688,7 +1712,7 @@ bool myMCUAgent::parsing_response_new(Byte * response_a, int selAll, int count, 
             temp_ref[0] = response[6];
             temp_ref[1] = response[7];
             f_temp_ref = convert_reftemp(temp_ref);
-            qDebug("i ma here");
+            qInfo("i ma here");
             v.push_back(f_temp_ref);
             qInfo("Board %d's Si7051 get temp: %f",(boardy*NUM_DAUGHTER_BOARDS_X +boardx+1), f_temp_ref);
 
@@ -1763,14 +1787,14 @@ bool myMCUAgent::parsing_response_new(Byte * response_a, int selAll, int count, 
             }
         }
 
-        qDebug("update temtemp plan");
+        qInfo("update temtemp plan");
 
         if(sel == all)
             update_temp_plan();
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
     return true;
 }
@@ -1799,97 +1823,97 @@ void myMCUAgent::sleep(long int msec)
 
 void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 {
-    Byte * char_cmd;
-    Byte response_len[2];
-    int send_len;
-    vector<float> resultSet;
-    vector<double> stdev_vec;
-    double stdev;
-    //double mean_stdev;
+//    Byte * char_cmd;
+//    Byte response_len[2];
+//    int send_len;
+//    vector<float> resultSet;
+//    vector<double> stdev_vec;
+//    double stdev;
+//    //double mean_stdev;
 
-    int boardx = 0;
-    int boardy = 0;
-    int row = 0;
-    int col = 0;
-    Byte* payload;
-    int payload_len = 0;
+//    int boardx = 0;
+//    int boardy = 0;
+//    int row = 0;
+//    int col = 0;
+//    Byte* payload;
+//    int payload_len = 0;
 
-    int sel = 1; //board
-    int cmd = 2; //get ref
+//    int sel = 1; //board
+//    int cmd = 2; //get ref
 
-    int timeout_count = 0;
+//    int timeout_count = 0;
 
-    do{
-        pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
-        for(int ii = 0; ii < send_len; ii++)
-        {
-            qDebug("%02x",char_cmd[ii]);
-        }
+//    do{
+//        pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//        for(int ii = 0; ii < send_len; ii++)
+//        {
+//            qInfo("%02x",char_cmd[ii]);
+//        }
 
-        //   if(this->mcu_uart->is_opened!=TRUE)
-        if(this->mcu_uart->open()!=TRUE)
-        {
-            s_errorbox("cmd execute error, uart is not opened");
-            return;
-        }
+//        //   if(this->mcu_uart->is_opened!=TRUE)
+//        if(this->mcu_uart->open()!=TRUE)
+//        {
+//            s_errorbox("cmd execute error, uart is not opened");
+//            return;
+//        }
 
-        for(int ii = 0; ii < send_len; ii++)
-        {
-            qDebug("len %02x",char_cmd[ii]);
-        }
+//        for(int ii = 0; ii < send_len; ii++)
+//        {
+//            qInfo("len %02x",char_cmd[ii]);
+//        }
 
 
-        this->mcu_uart->write(char_cmd,send_len);
-        delete char_cmd;
+//        this->mcu_uart->write(char_cmd,send_len);
+//        delete char_cmd;
 
-        if(this->mcu_uart->read(response_len,2) == false)
-        {
-            qDebug("mcu uart comand failed due to read timeout");
-            return ;
-        }
+//        if(this->mcu_uart->read(response_len,2) == false)
+//        {
+//            qInfo("mcu uart comand failed due to read timeout");
+//            return ;
+//        }
 
-        uint res_len = response_len[0] * 256 + response_len[1]-2;
-        Byte * response_res;
-        qDebug("need to read %d data", res_len);
-        // exit(0);
-        qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-        //exit(0);
+//        uint res_len = response_len[0] * 256 + response_len[1]-2;
+//        Byte * response_res;
+//        qInfo("need to read %d data", res_len);
+//        // exit(0);
+//        qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//        //exit(0);
 
-        response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-        if(this->mcu_uart->read(response_res,res_len) == false)
-        {
-            qDebug("mcu uart comand failed due to read timeout");
-            return ;
-        }
-        qDebug("before parsing [0]:%02x", response_len[0]);
-        qDebug("before parsing [1]:%02x", response_len[1]);
-        for(uint ii = 0; ii < res_len; ii++){
-            qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-        }
-        parsing_response_getref(response_res, resultSet);
-        sleep(500);
-        timeout_count++;
+//        response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//        if(this->mcu_uart->read(response_res,res_len) == false)
+//        {
+//            qInfo("mcu uart comand failed due to read timeout");
+//            return ;
+//        }
+//        qInfo("before parsing [0]:%02x", response_len[0]);
+//        qInfo("before parsing [1]:%02x", response_len[1]);
+//        for(uint ii = 0; ii < res_len; ii++){
+//            qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//        }
+//        parsing_response_getref(response_res, resultSet);
+//        sleep(500);
+//        timeout_count++;
 
-        if(timeout_count == 10000){
-            abort();
-        }
+//        if(timeout_count == 10000){
+//            abort();
+//        }
 
-        if(abs(resultSet.back()-temp_set) > 6) {
-            if(boardx < (NUM_DAUGHTER_BOARDS_X-1)) {
-                boardx++;
-            }    
-            else if(boardx == (NUM_DAUGHTER_BOARDS_X-1) && boardy < (NUM_DAUGHTER_BOARDS_Y-1)) {
-                boardx = 0;
-                boardy++;
-            }
-        }
+//        if(abs(resultSet.back()-temp_set) > 6) {
+//            if(boardx < (NUM_DAUGHTER_BOARDS_X-1)) {
+//                boardx++;
+//            }
+//            else if(boardx == (NUM_DAUGHTER_BOARDS_X-1) && boardy < (NUM_DAUGHTER_BOARDS_Y-1)) {
+//                boardx = 0;
+//                boardy++;
+//            }
+//        }
 
-    }while(abs(resultSet.back()-temp_set) > 4);
+//    }while(abs(resultSet.back()-temp_set) > 4);
 
-    resultSet.clear();
-    timeout_count = 0;
-    boardx = 0;
-    boardy = 0;
+//    resultSet.clear();
+//    timeout_count = 0;
+//    boardx = 0;
+//    boardy = 0;
 
 //    do{  //check stable by Si7051 left up
 //        stdev_vec.clear();
@@ -1899,7 +1923,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //            pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("%02x",char_cmd[ii]);
+//                qInfo("%02x",char_cmd[ii]);
 //            }
 
 //            //   if(this->mcu_uart->is_opened!=TRUE)
@@ -1911,7 +1935,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("len %02x",char_cmd[ii]);
+//                qInfo("len %02x",char_cmd[ii]);
 //            }
 
 
@@ -1920,27 +1944,27 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            if(this->mcu_uart->read(response_len,2) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
 
 //            uint res_len = response_len[0] * 256 + response_len[1]-2;
 //            Byte * response_res;
-//            qDebug("need to read %d data", res_len);
+//            qInfo("need to read %d data", res_len);
 //            // exit(0);
-//            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
 //            //exit(0);
 
 //            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
 //            if(this->mcu_uart->read(response_res,res_len) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
-//            qDebug("before parsing [0]:%02x", response_len[0]);
-//            qDebug("before parsing [1]:%02x", response_len[1]);
+//            qInfo("before parsing [0]:%02x", response_len[0]);
+//            qInfo("before parsing [1]:%02x", response_len[1]);
 //            for(uint ii = 0; ii < res_len; ii++){
-//                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
+//                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
 //            }
 //            parsing_response_getref(response_res, resultSet);
 
@@ -2001,7 +2025,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //            pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("%02x",char_cmd[ii]);
+//                qInfo("%02x",char_cmd[ii]);
 //            }
 
 //            //   if(this->mcu_uart->is_opened!=TRUE)
@@ -2013,7 +2037,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("len %02x",char_cmd[ii]);
+//                qInfo("len %02x",char_cmd[ii]);
 //            }
 
 
@@ -2022,27 +2046,27 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            if(this->mcu_uart->read(response_len,2) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
 
 //            uint res_len = response_len[0] * 256 + response_len[1]-2;
 //            Byte * response_res;
-//            qDebug("need to read %d data", res_len);
+//            qInfo("need to read %d data", res_len);
 //            // exit(0);
-//            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
 //            //exit(0);
 
 //            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
 //            if(this->mcu_uart->read(response_res,res_len) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
-//            qDebug("before parsing [0]:%02x", response_len[0]);
-//            qDebug("before parsing [1]:%02x", response_len[1]);
+//            qInfo("before parsing [0]:%02x", response_len[0]);
+//            qInfo("before parsing [1]:%02x", response_len[1]);
 //            for(uint ii = 0; ii < res_len; ii++){
-//                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
+//                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
 //            }
 //            parsing_response_getref(response_res, resultSet);
 
@@ -2090,116 +2114,12 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //    }while(stdev > 0.05);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-    resultSet.clear();
-    timeout_count = 0;
-    boardx = NUM_DAUGHTER_BOARDS_X-1;
-    boardy = 0;
-
-    do{  //check stable by Si7051 right up
-        stdev_vec.clear();
-        resultSet.clear();
-
-        for(int iii=0; iii<10; iii++) {
-            pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("%02x",char_cmd[ii]);
-            }
-
-            //   if(this->mcu_uart->is_opened!=TRUE)
-            if(this->mcu_uart->open()!=TRUE)
-            {
-                s_errorbox("cmd execute error, uart is not opened");
-                return;
-            }
-
-            for(int ii = 0; ii < send_len; ii++)
-            {
-                qDebug("len %02x",char_cmd[ii]);
-            }
-
-
-            this->mcu_uart->write(char_cmd,send_len);
-            delete char_cmd;
-
-            if(this->mcu_uart->read(response_len,2) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
-
-            uint res_len = response_len[0] * 256 + response_len[1]-2;
-            Byte * response_res;
-            qDebug("need to read %d data", res_len);
-            // exit(0);
-            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-            //exit(0);
-
-            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-            if(this->mcu_uart->read(response_res,res_len) == false)
-            {
-                qDebug("mcu uart comand failed due to read timeout");
-                return ;
-            }
-            qDebug("before parsing [0]:%02x", response_len[0]);
-            qDebug("before parsing [1]:%02x", response_len[1]);
-            for(uint ii = 0; ii < res_len; ii++){
-                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-            }
-            parsing_response_getref(response_res, resultSet);
-
-            sleep(500);
-        }
-
-        vector<float>::iterator it;
-
-        for(it=resultSet.begin(); it!=resultSet.end();) {
-            if(abs(*it-temp_set) > 5 && resultSet.size() > 1)
-                it = resultSet.erase(it);
-            else
-                ++it;
-        }
-
-        double sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
-        double mean =  sum / resultSet.size();
-
-        double accum  = 0.0;
-        std::for_each (std::begin(resultSet), std::end(resultSet), [&](const double d) {
-            accum  += (d-mean)*(d-mean);
-        });
-
-        stdev = sqrt(accum/(resultSet.size()-1));
-        stdev_vec.push_back(stdev);
-        qInfo("board %d's stdev is: %lf", (boardy*4+boardx+1), stdev);
-
-        resultSet.clear();
-
-        if(stdev > 0.7) {
-            if(boardx > 0) {
-                boardx--;
-            }
-            else if(boardx == 0 && boardy < (NUM_DAUGHTER_BOARDS_Y-1)) {
-                boardx = NUM_DAUGHTER_BOARDS_X-1;
-                boardy++;
-            }
-            resultSet.clear();
-        }
-
-        timeout_count++;
-        if(timeout_count == 10000){
-            abort();
-        }
-
-    }while(stdev > 0.06);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //    resultSet.clear();
 //    timeout_count = 0;
 //    boardx = NUM_DAUGHTER_BOARDS_X-1;
-//    boardy = NUM_DAUGHTER_BOARDS_Y-1;
+//    boardy = 0;
 
-//    do{  //check stable by Si7051 right down
+//    do{  //check stable by Si7051 right up
 //        stdev_vec.clear();
 //        resultSet.clear();
 
@@ -2207,7 +2127,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //            pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("%02x",char_cmd[ii]);
+//                qInfo("%02x",char_cmd[ii]);
 //            }
 
 //            //   if(this->mcu_uart->is_opened!=TRUE)
@@ -2219,7 +2139,7 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            for(int ii = 0; ii < send_len; ii++)
 //            {
-//                qDebug("len %02x",char_cmd[ii]);
+//                qInfo("len %02x",char_cmd[ii]);
 //            }
 
 
@@ -2228,41 +2148,41 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 
 //            if(this->mcu_uart->read(response_len,2) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
 
 //            uint res_len = response_len[0] * 256 + response_len[1]-2;
 //            Byte * response_res;
-//            qDebug("need to read %d data", res_len);
+//            qInfo("need to read %d data", res_len);
 //            // exit(0);
-//            qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
 //            //exit(0);
 
 //            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
 //            if(this->mcu_uart->read(response_res,res_len) == false)
 //            {
-//                qDebug("mcu uart comand failed due to read timeout");
+//                qInfo("mcu uart comand failed due to read timeout");
 //                return ;
 //            }
-//            qDebug("before parsing [0]:%02x", response_len[0]);
-//            qDebug("before parsing [1]:%02x", response_len[1]);
+//            qInfo("before parsing [0]:%02x", response_len[0]);
+//            qInfo("before parsing [1]:%02x", response_len[1]);
 //            for(uint ii = 0; ii < res_len; ii++){
-//                qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
+//                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
 //            }
 //            parsing_response_getref(response_res, resultSet);
 
-//            sleep(10000);
+//            sleep(500);
 //        }
 
-//          vector<float>::iterator it;
+//        vector<float>::iterator it;
 
-//          for(it=resultSet.begin(); it!=resultSet.end();) {
-//              if(abs(*it-temp_set) > 5)
-//                  it = resultSet.erase(it);
-//              else
-//                  ++it;
-//          }
+//        for(it=resultSet.begin(); it!=resultSet.end();) {
+//            if(abs(*it-temp_set) > 5 && resultSet.size() > 1)
+//                it = resultSet.erase(it);
+//            else
+//                ++it;
+//        }
 
 //        double sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
 //        double mean =  sum / resultSet.size();
@@ -2282,10 +2202,11 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //            if(boardx > 0) {
 //                boardx--;
 //            }
-//            else if(boardx == 0 && boardy > 0) {
-//                boardx = (NUM_DAUGHTER_BOARDS_Y-1)-1;
-//                boardy--;
+//            else if(boardx == 0 && boardy < (NUM_DAUGHTER_BOARDS_Y-1)) {
+//                boardx = NUM_DAUGHTER_BOARDS_X-1;
+//                boardy++;
 //            }
+//            resultSet.clear();
 //        }
 
 //        timeout_count++;
@@ -2293,14 +2214,117 @@ void  myMCUAgent::execute_cmd_check_stable(float temp_set)
 //            abort();
 //        }
 
-//    }while(stdev > 0.05);
+//    }while(stdev > 0.06);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////    resultSet.clear();
+////    timeout_count = 0;
+////    boardx = NUM_DAUGHTER_BOARDS_X-1;
+////    boardy = NUM_DAUGHTER_BOARDS_Y-1;
+
+////    do{  //check stable by Si7051 right down
+////        stdev_vec.clear();
+////        resultSet.clear();
+
+////        for(int iii=0; iii<10; iii++) {
+////            pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
+////            for(int ii = 0; ii < send_len; ii++)
+////            {
+////                qInfo("%02x",char_cmd[ii]);
+////            }
+
+////            //   if(this->mcu_uart->is_opened!=TRUE)
+////            if(this->mcu_uart->open()!=TRUE)
+////            {
+////                s_errorbox("cmd execute error, uart is not opened");
+////                return;
+////            }
+
+////            for(int ii = 0; ii < send_len; ii++)
+////            {
+////                qInfo("len %02x",char_cmd[ii]);
+////            }
 
 
-    timeout_count = 0;
-    boardx = 0;
-    boardy = 0;
-    resultSet.clear();
-    stdev_vec.clear();
+////            this->mcu_uart->write(char_cmd,send_len);
+////            delete char_cmd;
+
+////            if(this->mcu_uart->read(response_len,2) == false)
+////            {
+////                qInfo("mcu uart comand failed due to read timeout");
+////                return ;
+////            }
+
+////            uint res_len = response_len[0] * 256 + response_len[1]-2;
+////            Byte * response_res;
+////            qInfo("need to read %d data", res_len);
+////            // exit(0);
+////            qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+////            //exit(0);
+
+////            response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+////            if(this->mcu_uart->read(response_res,res_len) == false)
+////            {
+////                qInfo("mcu uart comand failed due to read timeout");
+////                return ;
+////            }
+////            qInfo("before parsing [0]:%02x", response_len[0]);
+////            qInfo("before parsing [1]:%02x", response_len[1]);
+////            for(uint ii = 0; ii < res_len; ii++){
+////                qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+////            }
+////            parsing_response_getref(response_res, resultSet);
+
+////            sleep(10000);
+////        }
+
+////          vector<float>::iterator it;
+
+////          for(it=resultSet.begin(); it!=resultSet.end();) {
+////              if(abs(*it-temp_set) > 5)
+////                  it = resultSet.erase(it);
+////              else
+////                  ++it;
+////          }
+
+////        double sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
+////        double mean =  sum / resultSet.size();
+
+////        double accum  = 0.0;
+////        std::for_each (std::begin(resultSet), std::end(resultSet), [&](const double d) {
+////            accum  += (d-mean)*(d-mean);
+////        });
+
+////        stdev = sqrt(accum/(resultSet.size()-1));
+////        stdev_vec.push_back(stdev);
+////        qInfo("board %d's stdev is: %lf", (boardy*4+boardx+1), stdev);
+
+////        resultSet.clear();
+
+////        if(stdev > 0.7) {
+////            if(boardx > 0) {
+////                boardx--;
+////            }
+////            else if(boardx == 0 && boardy > 0) {
+////                boardx = (NUM_DAUGHTER_BOARDS_Y-1)-1;
+////                boardy--;
+////            }
+////        }
+
+////        timeout_count++;
+////        if(timeout_count == 10000){
+////            abort();
+////        }
+
+////    }while(stdev > 0.05);
+
+
+//    timeout_count = 0;
+//    boardx = 0;
+//    boardy = 0;
+//    resultSet.clear();
+//    stdev_vec.clear();
 }
 
 
@@ -2317,7 +2341,7 @@ bool myMCUAgent::parsing_response_getref(Byte * response_a, vector<float> &vec)
     int row;
     int col;
     //Byte * payload;
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -2335,35 +2359,35 @@ bool myMCUAgent::parsing_response_getref(Byte * response_a, vector<float> &vec)
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -2375,7 +2399,7 @@ bool myMCUAgent::parsing_response_getref(Byte * response_a, vector<float> &vec)
     col   = response[5];
     // valid check
     if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        qDebug("gettemp_ref should sel all or board");
+        qInfo("gettemp_ref should sel all or board");
         return false;
     }
     // function
@@ -2411,8 +2435,8 @@ bool myMCUAgent::parsing_response_getref(Byte * response_a, vector<float> &vec)
         }
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
     return true;
 }
@@ -2434,7 +2458,7 @@ bool myMCUAgent::parsing_response_getref_new(Byte * response_a, vector<float> &v
     vector<float> resultSet_filter;
     vector<float> y;
 
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -2452,35 +2476,35 @@ bool myMCUAgent::parsing_response_getref_new(Byte * response_a, vector<float> &v
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -2492,7 +2516,7 @@ bool myMCUAgent::parsing_response_getref_new(Byte * response_a, vector<float> &v
     col   = response[5];
     // valid check
     if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        qDebug("gettemp_ref should sel all or board");
+        qInfo("gettemp_ref should sel all or board");
         return false;
     }
     // function
@@ -2571,8 +2595,8 @@ bool myMCUAgent::parsing_response_getref_new(Byte * response_a, vector<float> &v
         }
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
 
     return true;
@@ -2597,7 +2621,7 @@ bool myMCUAgent::parsing_response_checktemp(Byte * response_a, vector<vector<flo
 
     vector<float> vec;
 
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -2615,35 +2639,35 @@ bool myMCUAgent::parsing_response_checktemp(Byte * response_a, vector<vector<flo
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -2656,7 +2680,7 @@ bool myMCUAgent::parsing_response_checktemp(Byte * response_a, vector<vector<flo
 
     // valid check
     //if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        //qDebug("gettemp_ref should sel all or board");
+        //qInfo("gettemp_ref should sel all or board");
         //return false;
     //}
     // function
@@ -2757,179 +2781,179 @@ bool myMCUAgent::parsing_response_checktemp(Byte * response_a, vector<vector<flo
         }
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
     return true;
 }
 
 void  myMCUAgent::execute_temp_check()
 {
-    Byte * char_cmd;
-    Byte response_len[2];
-    int send_len;
-    //vector<float> resultSet;
-    //double stdev;
+//    Byte * char_cmd;
+//    Byte response_len[2];
+//    int send_len;
+//    //vector<float> resultSet;
+//    //double stdev;
 
-    int boardx = 0;
-    int boardy = 0;
-    int row = 0;
-    int col = 0;
-    Byte* payload;
-    int payload_len = 0;
+//    int boardx = 0;
+//    int boardy = 0;
+//    int row = 0;
+//    int col = 0;
+//    Byte* payload;
+//    int payload_len = 0;
 
-    //int sel = 1; //board
-    int sel = 4; //individual
-    int cmd = 1; //get temp
+//    //int sel = 1; //board
+//    int sel = 4; //individual
+//    int cmd = 1; //get temp
 
-    //int timeout_count = 0;
-    int right_count = 0;
-    int right_count_total = 0;
+//    //int timeout_count = 0;
+//    int right_count = 0;
+//    int right_count_total = 0;
 
-    vector<vector<float>> vvec(200,vector<float>(20));
+//    vector<vector<float>> vvec(200,vector<float>(20));
 
-    for(boardy=0; boardy<NUM_DAUGHTER_BOARDS_Y; boardy++) {
-        for(boardx=0; boardx<NUM_DAUGHTER_BOARDS_X; boardx++) {
-            for(int kk = 0; kk<NUM_CHIPS_X;kk++){
-                for(int ll = 0; ll<NUM_CHIPS_Y;ll++){
-                    for(int iii=0; iii<5; iii++) {
-                        pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, kk, (ll),  payload,  payload_len, char_cmd, &send_len);
-                        for(int ii = 0; ii < send_len; ii++)
-                        {
-                            qDebug("%02x",char_cmd[ii]);
-                        }
+//    for(boardy=0; boardy<NUM_DAUGHTER_BOARDS_Y; boardy++) {
+//        for(boardx=0; boardx<NUM_DAUGHTER_BOARDS_X; boardx++) {
+//            for(int kk = 0; kk<NUM_CHIPS_X;kk++){
+//                for(int ll = 0; ll<NUM_CHIPS_Y;ll++){
+//                    for(int iii=0; iii<5; iii++) {
+//                        pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, kk, (ll),  payload,  payload_len, char_cmd, &send_len);
+//                        for(int ii = 0; ii < send_len; ii++)
+//                        {
+//                            qInfo("%02x",char_cmd[ii]);
+//                        }
 
-                        //   if(this->mcu_uart->is_opened!=TRUE)
-                        if(this->mcu_uart->open()!=TRUE)
-                        {
-                            s_errorbox("cmd execute error, uart is not opened");
-                            return;
-                        }
+//                        //   if(this->mcu_uart->is_opened!=TRUE)
+//                        if(this->mcu_uart->open()!=TRUE)
+//                        {
+//                            s_errorbox("cmd execute error, uart is not opened");
+//                            return;
+//                        }
 
-                        for(int ii = 0; ii < send_len; ii++)
-                        {
-                            qDebug("len %02x",char_cmd[ii]);
-                        }
-
-
-                        this->mcu_uart->write(char_cmd,send_len);
-                        delete char_cmd;
-
-                        if(this->mcu_uart->read(response_len,2) == false)
-                        {
-                            qDebug("mcu uart comand failed due to read timeout");
-                            return ;
-                        }
-
-                        uint res_len = response_len[0] * 256 + response_len[1]-2;
-                        Byte * response_res;
-                        qDebug("need to read %d data", res_len);
-                        // exit(0);
-                        qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-                        //exit(0);
-
-                        response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-                        if(this->mcu_uart->read(response_res,res_len) == false)
-                        {
-                            qDebug("mcu uart comand failed due to read timeout");
-                            return ;
-                        }
-                        qDebug("before parsing [0]:%02x", response_len[0]);
-                        qDebug("before parsing [1]:%02x", response_len[1]);
-                        for(uint ii = 0; ii < res_len; ii++){
-                            qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-                        }
-                        //parsing_response_getref(response_res, resultSet);
-                        parsing_response_checktemp(response_res, vvec, iii, right_count);
-
-                        //sleep(1000);
-                    }
-                }
-
-            }
-            qInfo("\r\nBoard %d Temperature check pass %d chips, fail %d chips.\r\n\r\n",1+ boardy*4 + boardx,right_count,NUM_CHIPS_X*NUM_CHIPS_Y-right_count);
-            right_count_total += right_count;
-            right_count = 0;
-
-            //vvec.clear();
-        }
-    }
-    qInfo("\r\nTotal pass %d chips, fail %d chips.\r\n\r\n",right_count_total,NUM_CHIPS_X*NUM_CHIPS_Y*NUM_DAUGHTER_BOARDS_X*NUM_DAUGHTER_BOARDS_Y-right_count_total);
-    right_count_total = 0;
-
-        //double sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
-        //double mean =  sum / resultSet.size();
-
-        //double accum  = 0.0;
-        //std::for_each (std::begin(resultSet), std::end(resultSet), [&](const double d) {
-                //accum  += (d-mean)*(d-mean);
-            //});
-
-        //stdev = sqrt(accum/(resultSet.size()-1));
-        //qInfo("stdev is: %lf", stdev);
+//                        for(int ii = 0; ii < send_len; ii++)
+//                        {
+//                            qInfo("len %02x",char_cmd[ii]);
+//                        }
 
 
-        //vvec.clear();
+//                        this->mcu_uart->write(char_cmd,send_len);
+//                        delete char_cmd;
+
+//                        if(this->mcu_uart->read(response_len,2) == false)
+//                        {
+//                            qInfo("mcu uart comand failed due to read timeout");
+//                            return ;
+//                        }
+
+//                        uint res_len = response_len[0] * 256 + response_len[1]-2;
+//                        Byte * response_res;
+//                        qInfo("need to read %d data", res_len);
+//                        // exit(0);
+//                        qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//                        //exit(0);
+
+//                        response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//                        if(this->mcu_uart->read(response_res,res_len) == false)
+//                        {
+//                            qInfo("mcu uart comand failed due to read timeout");
+//                            return ;
+//                        }
+//                        qInfo("before parsing [0]:%02x", response_len[0]);
+//                        qInfo("before parsing [1]:%02x", response_len[1]);
+//                        for(uint ii = 0; ii < res_len; ii++){
+//                            qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//                        }
+//                        //parsing_response_getref(response_res, resultSet);
+//                        parsing_response_checktemp(response_res, vvec, iii, right_count);
+
+//                        //sleep(1000);
+//                    }
+//                }
+
+//            }
+//            qInfo("\r\nBoard %d Temperature check pass %d chips, fail %d chips.\r\n\r\n",1+ boardy*4 + boardx,right_count,NUM_CHIPS_X*NUM_CHIPS_Y-right_count);
+//            right_count_total += right_count;
+//            right_count = 0;
+
+//            //vvec.clear();
+//        }
+//    }
+//    qInfo("\r\nTotal pass %d chips, fail %d chips.\r\n\r\n",right_count_total,NUM_CHIPS_X*NUM_CHIPS_Y*NUM_DAUGHTER_BOARDS_X*NUM_DAUGHTER_BOARDS_Y-right_count_total);
+//    right_count_total = 0;
+
+//        //double sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
+//        //double mean =  sum / resultSet.size();
+
+//        //double accum  = 0.0;
+//        //std::for_each (std::begin(resultSet), std::end(resultSet), [&](const double d) {
+//                //accum  += (d-mean)*(d-mean);
+//            //});
+
+//        //stdev = sqrt(accum/(resultSet.size()-1));
+//        //qInfo("stdev is: %lf", stdev);
+
+
+//        //vvec.clear();
 
 }
 
 void myMCUAgent::execute_getref_cmd(int sel, int cmd, int boardx, int boardy,int row,int col,Byte* payload, int payload_len, float temp_set){
-    Byte * char_cmd;
-    Byte response_len[2];
-    int send_len;
+//    Byte * char_cmd;
+//    Byte response_len[2];
+//    int send_len;
 
-    qDebug("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
-
-
-    pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
+//    qInfo("%d %d %d %d %d %d",sel,cmd,boardx,boardy,row,col);
 
 
-    for(int ii = 0; ii < send_len; ii++)
-    {
-        qDebug("%02x",char_cmd[ii]);
-    }
-
-    //   if(this->mcu_uart->is_opened!=TRUE)
-    if(this->mcu_uart->open()!=TRUE)
-    {
-        s_errorbox("cmd execute error, uart is not opened");
-        return;
-    }
-
-    for(int ii = 0; ii < send_len; ii++)
-    {
-        qDebug("len %02x",char_cmd[ii]);
-    }
+//    pack_cmd(sel, cmd, boardy*NUM_DAUGHTER_BOARDS_X + boardx, row, col,  payload,  payload_len, char_cmd, &send_len);
 
 
-    this->mcu_uart->write(char_cmd,send_len);
-    delete char_cmd;
+//    for(int ii = 0; ii < send_len; ii++)
+//    {
+//        qInfo("%02x",char_cmd[ii]);
+//    }
 
-    if(this->mcu_uart->read(response_len,2) == false)
-    {
-        qDebug("mcu uart comand failed due to read timeout");
-        return ;
-    }
+//    //   if(this->mcu_uart->is_opened!=TRUE)
+//    if(this->mcu_uart->open()!=TRUE)
+//    {
+//        s_errorbox("cmd execute error, uart is not opened");
+//        return;
+//    }
 
-    uint res_len = response_len[0] * 256 + response_len[1]-2;
-    Byte * response_res;
-    qDebug("need to read %d data", res_len);
-    // exit(0);
-    qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-    //exit(0);
+//    for(int ii = 0; ii < send_len; ii++)
+//    {
+//        qInfo("len %02x",char_cmd[ii]);
+//    }
 
-    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-    if(this->mcu_uart->read(response_res,res_len) == false)
-    {
-        qDebug("mcu uart comand failed due to read timeout");
-        return ;
-    }
-    qDebug("before parsing [0]:%02x", response_len[0]);
-    qDebug("before parsing [1]:%02x", response_len[1]);
-    for(uint ii = 0; ii < res_len; ii++){
-        qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-    }
-    parsing_response_for_getref(response_res, temp_set);
+
+//    this->mcu_uart->write(char_cmd,send_len);
+//    delete char_cmd;
+
+//    if(this->mcu_uart->read(response_len,2) == false)
+//    {
+//        qInfo("mcu uart comand failed due to read timeout");
+//        return ;
+//    }
+
+//    uint res_len = response_len[0] * 256 + response_len[1]-2;
+//    Byte * response_res;
+//    qInfo("need to read %d data", res_len);
+//    // exit(0);
+//    qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//    //exit(0);
+
+//    response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//    if(this->mcu_uart->read(response_res,res_len) == false)
+//    {
+//        qInfo("mcu uart comand failed due to read timeout");
+//        return ;
+//    }
+//    qInfo("before parsing [0]:%02x", response_len[0]);
+//    qInfo("before parsing [1]:%02x", response_len[1]);
+//    for(uint ii = 0; ii < res_len; ii++){
+//        qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//    }
+//    parsing_response_for_getref(response_res, temp_set);
 }
 
 bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
@@ -2945,7 +2969,7 @@ bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
     int row;
     int col;
     //Byte * payload;
-    qDebug("sel byte : %02x", response[0]);
+    qInfo("sel byte : %02x", response[0]);
     if(response[0] == 0x5a )
     {
         sel = all; // sel all
@@ -2963,35 +2987,35 @@ bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
         sel = col_sel; //sel col
     }
     else{
-        qDebug("response sel field not recognized");
+        qInfo("response sel field not recognized");
         return false;
     }
     if((response[1] == 0x11) && (response[2] ==0x00)) {
         cmd = ow_doconvert;//ow_doconvert
-        qDebug("ow_doconvert response");
+        qInfo("ow_doconvert response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x01)) {
         cmd = ow_gettemp;
-        qDebug("ow_gettemp response");
+        qInfo("ow_gettemp response");
     }
     else if((response[1] == 0x11) && (response[2] ==0x02)) {
         cmd = ow_gettemp_ref;
-        qDebug("ow_gettemp_ref response");
+        qInfo("ow_gettemp_ref response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x00)) {
         cmd = ow_writeparameters;
-        qDebug("ow_writeparameters response");
+        qInfo("ow_writeparameters response");
     }
     else if((response[1] == 0x12) && (response[2] ==0x01)) {
         cmd = ow_getromcode;
-        qDebug("ow_getromcode response");
+        qInfo("ow_getromcode response");
     }
     else if((response[1] == 0x13) && (response[2] ==0x00)) {
         cmd = ow_setcoeff;
-        qDebug("ow_setcoeff response");
+        qInfo("ow_setcoeff response");
     }
     else{
-        qDebug("response cmd field not recognized");
+        qInfo("response cmd field not recognized");
         return false;
     }
 
@@ -3003,7 +3027,7 @@ bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
     col   = response[5];
     // valid check
     if((cmd == ow_gettemp_ref) && (sel != all && sel != board_sel)){ // only work for in mode
-        qDebug("gettemp_ref should sel all or board");
+        qInfo("gettemp_ref should sel all or board");
         return false;
     }
     // function
@@ -3026,7 +3050,7 @@ bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
                     temp_ref[0] = response[6+(ii*NUM_DAUGHTER_BOARDS_X +jj)*2];
                     temp_ref[1] = response[6+(ii*NUM_DAUGHTER_BOARDS_X +jj)*2+1];
                     f_temp_ref = convert_reftemp(temp_ref);
-                    qDebug("i ma here");
+                    qInfo("i ma here");
                     map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(f_temp_ref,f_temp_ref);
                     ref_vec.push_back(f_temp_ref);
                 }
@@ -3067,181 +3091,181 @@ bool myMCUAgent::parsing_response_for_getref(Byte * response_a, float temp_set)
             temp_ref[0] = response[6];
             temp_ref[1] = response[7];
             f_temp_ref = convert_reftemp(temp_ref);
-            qDebug("i ma here");
+            qInfo("i ma here");
             map.ref_map[boardx*NUM_DAUGHTER_BOARDS_X +boardy].update_temp_record(f_temp_ref,f_temp_ref);
         }
 
-        qDebug("update temtemp plan");
+        qInfo("update temtemp plan");
 
         if(sel == all)
             update_temp_plan();
     }
     else {
-        //qDebug("TODO: reponse need to be parsed");
-        qDebug("executed command without payload send back");
+        //qInfo("TODO: reponse need to be parsed");
+        qInfo("executed command without payload send back");
     }
     return true;
 }
 
 
 void myMCUAgent::get_ref(float temp_set) {
-    Byte * char_cmd;
-    Byte response_len[2];
-    int send_len;
-    vector<float> resultSet;
-    vector<float> resultSet_filter;
-    vector<float> ref_vec;
-    //double mean_stdev;
+//    Byte * char_cmd;
+//    Byte response_len[2];
+//    int send_len;
+//    vector<float> resultSet;
+//    vector<float> resultSet_filter;
+//    vector<float> ref_vec;
+//    //double mean_stdev;
 
-    //int boardx = 0;
-    //int boardy = 0;
-    int row = 0;
-    int col = 0;
-    Byte* payload;
-    int payload_len = 0;
+//    //int boardx = 0;
+//    //int boardy = 0;
+//    int row = 0;
+//    int col = 0;
+//    Byte* payload;
+//    int payload_len = 0;
 
-    int sel = 1; //board
-    int cmd = 2; //get ref
+//    int sel = 1; //board
+//    int cmd = 2; //get ref
 
-    vector<float>::iterator it;
+//    vector<float>::iterator it;
 
-    for (int ii = 0; ii < NUM_DAUGHTER_BOARDS_Y; ii ++)
-    {
-        for (int jj = 0; jj < NUM_DAUGHTER_BOARDS_X; jj ++)
-        {
-            resultSet.clear();
+//    for (int ii = 0; ii < NUM_DAUGHTER_BOARDS_Y; ii ++)
+//    {
+//        for (int jj = 0; jj < NUM_DAUGHTER_BOARDS_X; jj ++)
+//        {
+//            resultSet.clear();
 
-            for(int iii=0; iii<20; iii++) {
-                pack_cmd(sel, cmd, ii*NUM_DAUGHTER_BOARDS_X + jj, row, col,  payload,  payload_len, char_cmd, &send_len);
-                for(int ii = 0; ii < send_len; ii++)
-                {
-                    qDebug("%02x",char_cmd[ii]);
-                }
+//            for(int iii=0; iii<20; iii++) {
+//                pack_cmd(sel, cmd, ii*NUM_DAUGHTER_BOARDS_X + jj, row, col,  payload,  payload_len, char_cmd, &send_len);
+//                for(int ii = 0; ii < send_len; ii++)
+//                {
+//                    qInfo("%02x",char_cmd[ii]);
+//                }
 
-                //   if(this->mcu_uart->is_opened!=TRUE)
-                if(this->mcu_uart->open()!=TRUE)
-                {
-                    s_errorbox("cmd execute error, uart is not opened");
-                    return;
-                }
+//                //   if(this->mcu_uart->is_opened!=TRUE)
+//                if(this->mcu_uart->open()!=TRUE)
+//                {
+//                    s_errorbox("cmd execute error, uart is not opened");
+//                    return;
+//                }
 
-                for(int ii = 0; ii < send_len; ii++)
-                {
-                    qDebug("len %02x",char_cmd[ii]);
-                }
+//                for(int ii = 0; ii < send_len; ii++)
+//                {
+//                    qInfo("len %02x",char_cmd[ii]);
+//                }
 
 
-                this->mcu_uart->write(char_cmd,send_len);
-                delete char_cmd;
+//                this->mcu_uart->write(char_cmd,send_len);
+//                delete char_cmd;
 
-                if(this->mcu_uart->read(response_len,2) == false)
-                {
-                    qDebug("mcu uart comand failed due to read timeout");
-                    return ;
-                }
+//                if(this->mcu_uart->read(response_len,2) == false)
+//                {
+//                    qInfo("mcu uart comand failed due to read timeout");
+//                    return ;
+//                }
 
-                uint res_len = response_len[0] * 256 + response_len[1]-2;
-                Byte * response_res;
-                qDebug("need to read %d data", res_len);
-                // exit(0);
-                qDebug("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
-                //exit(0);
+//                uint res_len = response_len[0] * 256 + response_len[1]-2;
+//                Byte * response_res;
+//                qInfo("need to read %d data", res_len);
+//                // exit(0);
+//                qInfo("port: %d, baud: %d, data:%d, parity:%d, stop:%d, flow;%d", this->mcu_uart->port_id, this->mcu_uart->dcb.BaudRate, this->mcu_uart->dcb.ByteSize,this->mcu_uart->dcb.Parity,this->mcu_uart->dcb.StopBits,this->mcu_uart->dcb.fInX);
+//                //exit(0);
 
-                response_res = (Byte*)malloc(sizeof(Byte)*res_len);
-                if(this->mcu_uart->read(response_res,res_len) == false)
-                {
-                    qDebug("mcu uart comand failed due to read timeout");
-                    return ;
-                }
-                qDebug("before parsing [0]:%02x", response_len[0]);
-                qDebug("before parsing [1]:%02x", response_len[1]);
-                for(uint ii = 0; ii < res_len; ii++){
-                    qDebug("before parsing [%d]:%02x", ii,response_res[ii]);
-                }
-                //parsing_response_getref(response_res, resultSet);
-                parsing_response_getref_new(response_res, resultSet, ref_vec, iii, temp_set, ii, jj);
+//                response_res = (Byte*)malloc(sizeof(Byte)*res_len);
+//                if(this->mcu_uart->read(response_res,res_len) == false)
+//                {
+//                    qInfo("mcu uart comand failed due to read timeout");
+//                    return ;
+//                }
+//                qInfo("before parsing [0]:%02x", response_len[0]);
+//                qInfo("before parsing [1]:%02x", response_len[1]);
+//                for(uint ii = 0; ii < res_len; ii++){
+//                    qInfo("before parsing [%d]:%02x", ii,response_res[ii]);
+//                }
+//                //parsing_response_getref(response_res, resultSet);
+//                parsing_response_getref_new(response_res, resultSet, ref_vec, iii, temp_set, ii, jj);
 
-                sleep(5000);  //5s sample
-            }
-
-            //vector<float>::iterator it;
-
-//            for(it=resultSet.begin(); it!=resultSet.end();) {
-//                if(abs(*it-temp_set) > 5 && resultSet.size() > 1)
-//                    it = resultSet.erase(it);
-//                else
-//                    ++it;
+//                sleep(5000);  //5s sample
 //            }
 
-//            for(int idx=resultSet.size()/2; idx<resultSet.size(); idx++) {
-//                resultSet_filter.push_back(resultSet[idx]);
+//            //vector<float>::iterator it;
+
+////            for(it=resultSet.begin(); it!=resultSet.end();) {
+////                if(abs(*it-temp_set) > 5 && resultSet.size() > 1)
+////                    it = resultSet.erase(it);
+////                else
+////                    ++it;
+////            }
+
+////            for(int idx=resultSet.size()/2; idx<resultSet.size(); idx++) {
+////                resultSet_filter.push_back(resultSet[idx]);
+////            }
+
+//            //float sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
+//            //float max =  *max_element(resultSet.begin(),resultSet.end());
+//            //float min =  *min_element(resultSet.begin(),resultSet.end());
+//            //float mean =  sum / resultSet.size();
+
+//            //if(resultSet.size() > 2) {
+//                //mean = (sum-max-min)/(resultSet.size()-2);
+//            //}
+
+
+////            float sum = std::accumulate(std::begin(resultSet_filter), std::end(resultSet_filter), 0.0);
+////            float max =  *max_element(resultSet_filter.begin(),resultSet_filter.end());
+////            float min =  *min_element(resultSet_filter.begin(),resultSet_filter.end());
+////            float mean =  sum / resultSet_filter.size();
+
+////            if(resultSet_filter.size() > 2) {
+////                mean = (sum-max-min)/(resultSet_filter.size()-2);
+////            }
+
+////            qInfo("Mean value of Si7051 on Board %d is: %f",(ii*NUM_DAUGHTER_BOARDS_X + jj+1),mean);
+
+////            map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(mean,mean);
+
+
+////            ref_vec.push_back(mean);
+
+//            //sleep(1500);
+//        }
+//    }
+
+//    //for(it=ref_vec.begin(); it!=ref_vec.end();) {
+//        //if(*it < -30 && ref_vec.size() > 1)
+//            //it = ref_vec.erase(it);
+//        //else
+//            //++it;
+//    //}
+
+
+//    //float sum_ref = std::accumulate(std::begin(ref_vec), std::end(ref_vec), 0.0);
+
+//    float sum_ref = 0;
+//    int counter = 0;
+
+//    for(int ij=0; ij<ref_vec.size(); ij++) {
+//        if(ref_vec[ij] < -30) {
+//            counter++;
+//        }
+//        else {
+//            sum_ref += ref_vec[ij];
+//        }
+//    }
+
+//    float mean_ref = sum_ref / (ref_vec.size()-counter);
+
+//    for (int ii = 0; ii < NUM_DAUGHTER_BOARDS_Y; ii ++)
+//    {
+//        for (int jj = 0; jj < NUM_DAUGHTER_BOARDS_X; jj ++)
+//        {
+//            if(abs(ref_vec[ii*NUM_DAUGHTER_BOARDS_X+jj]-mean_ref) > 1.2) {
+//                int board_indx = ii*NUM_DAUGHTER_BOARDS_X +jj+1;
+//                map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(mean_ref,mean_ref);
+//                qInfo("Board %d's ref %f has been changed to %f",board_indx,ref_vec[ii*NUM_DAUGHTER_BOARDS_X+jj],mean_ref);
 //            }
-
-            //float sum = std::accumulate(std::begin(resultSet), std::end(resultSet), 0.0);
-            //float max =  *max_element(resultSet.begin(),resultSet.end());
-            //float min =  *min_element(resultSet.begin(),resultSet.end());
-            //float mean =  sum / resultSet.size();
-
-            //if(resultSet.size() > 2) {
-                //mean = (sum-max-min)/(resultSet.size()-2);
-            //}
-
-
-//            float sum = std::accumulate(std::begin(resultSet_filter), std::end(resultSet_filter), 0.0);
-//            float max =  *max_element(resultSet_filter.begin(),resultSet_filter.end());
-//            float min =  *min_element(resultSet_filter.begin(),resultSet_filter.end());
-//            float mean =  sum / resultSet_filter.size();
-
-//            if(resultSet_filter.size() > 2) {
-//                mean = (sum-max-min)/(resultSet_filter.size()-2);
-//            }
-
-//            qInfo("Mean value of Si7051 on Board %d is: %f",(ii*NUM_DAUGHTER_BOARDS_X + jj+1),mean);
-
-//            map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(mean,mean);
-
-
-//            ref_vec.push_back(mean);
-
-            //sleep(1500);
-        }
-    }
-
-    //for(it=ref_vec.begin(); it!=ref_vec.end();) {
-        //if(*it < -30 && ref_vec.size() > 1)
-            //it = ref_vec.erase(it);
-        //else
-            //++it;
-    //}
-
-
-    //float sum_ref = std::accumulate(std::begin(ref_vec), std::end(ref_vec), 0.0);
-
-    float sum_ref = 0;
-    int counter = 0;
-
-    for(int ij=0; ij<ref_vec.size(); ij++) {
-        if(ref_vec[ij] < -30) {
-            counter++;
-        }
-        else {
-            sum_ref += ref_vec[ij];
-        }
-    }
-
-    float mean_ref = sum_ref / (ref_vec.size()-counter);
-
-    for (int ii = 0; ii < NUM_DAUGHTER_BOARDS_Y; ii ++)
-    {
-        for (int jj = 0; jj < NUM_DAUGHTER_BOARDS_X; jj ++)
-        {
-            if(abs(ref_vec[ii*NUM_DAUGHTER_BOARDS_X+jj]-mean_ref) > 1.2) {
-                int board_indx = ii*NUM_DAUGHTER_BOARDS_X +jj+1;
-                map.ref_map[ii*NUM_DAUGHTER_BOARDS_X +jj].update_temp_record(mean_ref,mean_ref);
-                qInfo("Board %d's ref %f has been changed to %f",board_indx,ref_vec[ii*NUM_DAUGHTER_BOARDS_X+jj],mean_ref);
-            }
-        }
-    }
-    ref_vec.clear();
+//        }
+//    }
+//    ref_vec.clear();
 
 }

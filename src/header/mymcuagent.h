@@ -100,8 +100,9 @@ private:
 
     bool parsing_response_getref_new(Byte * response_a, vector<float> &vec, vector<float> &ref_vec, int count, float temp_set, int mboard_y, int mboard_x);
 
-    void execute_uart_cmd_new(int sel, int cmd, int boardx, int boardy,int row,int col,Byte* payload, int payload_len, float temp_set);
+//    void execute_uart_cmd_new(int sel, int cmd, int boardx, int boardy,int row,int col,Byte* payload, int payload_len, float temp_set);
     bool parsing_response_new(Byte * response_a, int selAll, int count, vector<vector<float>> &vv, vector<float> &v, vector<float> &ref_vec, float temp_set, bool ready);
+
 
 };
 

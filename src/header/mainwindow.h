@@ -43,9 +43,6 @@ public:
 
 
 private slots:
-//    void on_TestUart_clicked();
-//    void on_RunCmd_clicked();
- //   void on_TextUartResponse_Clear_clicked();
     void update_display();
     void errorbox(QString ErrorMessage);
 

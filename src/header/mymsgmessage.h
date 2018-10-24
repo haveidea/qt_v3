@@ -10,7 +10,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <myglobal.h>
-extern QString LogNames[5];
+//extern QString LogNames[5];
 
 void outputMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -27,23 +27,32 @@ void outputMessage(QtMsgType type, const QMessageLogContext &context, const QStr
     {
     case QtInfoMsg:
         text = QString("Info:");
-        file.setFileName(LogNames[0]);
+        //file.setFileName(LogNames[0]);
+              file.setFileName("info");
         break;
     case QtDebugMsg:
         text = QString("Debug:");
-        file.setFileName(LogNames[1]);
+      //  file.setFileName(LogNames[1]);
+        file.setFileName("info");
+
         break;
     case QtWarningMsg:
         text = QString("Warning:");
-        file.setFileName(LogNames[2]);
+    //    file.setFileName(LogNames[2]);
+        file.setFileName("info");
+
         break;
     case QtCriticalMsg:
         text = QString("Critical:");
-        file.setFileName(LogNames[3]);
+  //      file.setFileName(LogNames[3]);
+        file.setFileName("info");
+
         break;
     case QtFatalMsg:
         text = QString("Fatal:");
-        file.setFileName(LogNames[4]);
+//        file.setFileName(LogNames[4]);
+        file.setFileName("info");
+
         break;
 
         text = QString("Type(%1):").arg(type);
